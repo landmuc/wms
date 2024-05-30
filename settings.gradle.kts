@@ -21,3 +21,12 @@ dependencyResolutionManagement {
 
 rootProject.name = "wms"
 include(":app")
+include(":core")
+include(":feature")
+// put all shared modules here
+// e.g.: include(":core:model)
+// e.g.: include(":feature:search)
+include(":feature:authentication")
+include(":feature:event_list")
+include(":feature:event_admin")
+include(":feature:event_user")

@@ -5,28 +5,67 @@ coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
-lifecycleRuntimeKtx = "2.8.0"
+lifecycleRuntimeKtx = "2.8.1"
 activityCompose = "1.9.0"
 composeBom = "2024.05.00"
+jetbrainsKotlinJvm = "2.0.0"
+appcompat = "1.7.0"
+material = "1.12.0"
 
 [libraries]
+##
+# androidx-core-ktx:Provides Kotlin extensions for core Android functionalities
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+# androidx-lifecycle-runtime-ktx: Kotlin extensions for managing the lifecycle of composables
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+# androidx-activity-compose: Enables integration between Jetpack Compose and Activities
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+
+## Jetpack Compose & Material 3
+# androidx-compose-bom: Bill of Materials (BOM) for Jetpack Compose, manages dependeny versions
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+# androidx-ui: Core foundation for building UI with Jetpack Compose
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+# androidx-ui-graphics: Provides UI graphics funtionalities for Compose
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+# android-ui-tooling: Tools for developing and inspecting Compose UI
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+# androidx-ui-tooling-preview: Enables previewing composables in Android Studio
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+# androidx-ui-test-manifest: AndroidManifest.xml configuration for Compose UI tests
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+# androidx-ui-test-junit4: JUnit4 runner for testing Compose UI
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+# androidx-material3: Material Design 3 components for Compose
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
+##
+# androidx-appcompat: This library provides compatibility features for older Android APIs on newer versions. It's generally not required for Jetpack Compose projects since Compose targets newer APIs.
+# This library was automatically added on the first app launch
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+# material: Material Design components for building UIs.
+# This library was automatically added on the first app launch
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+## Testing
+# junit: The core JUnit framework for writing unit tests
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+# androidx-junit: JUnit runner and extensions for Android testing
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+# androidx-espresso-core: UI testing with Espresso
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+
+[bundles]
+compose = ["androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling-preview", "androidx-material3"]
+
 [plugins]
+# android-application: Plugin to configure an Android application project
 android-application = { id = "com.android.application", version.ref = "agp" }
+# jetbrains-kotlin-android: Plugin to enable Kotlin support for Android development
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+# compose-compiler: Plugin for compiling Compose code
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin"}
+# jetbrains-kotlin-jvm: Plugin for enabling JVM support for Kotlin code
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 
