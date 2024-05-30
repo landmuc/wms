@@ -47,6 +47,10 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 # This library was automatically added on the first app launch
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
+## build-logic
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+
 ## Testing
 # junit: The core JUnit framework for writing unit tests
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -69,3 +73,5 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 
+## convention plugins
+wms-android-library = { id = "wms.android.library", version = "unspecified"}
