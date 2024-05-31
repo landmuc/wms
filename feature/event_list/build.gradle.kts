@@ -1,6 +1,5 @@
 plugins {
     // convention plugins
-    alias(libs.plugins.wms.android.library)
     alias(libs.plugins.wms.android.feature)
     // other plugins
     alias(libs.plugins.compose.compiler)
