@@ -63,6 +63,7 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 compose = ["androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling-preview", "androidx-material3"]
 
 [plugins]
+android-library = { id = "com.android.library", version.ref = "agp" }
 # android-application: Plugin to configure an Android application project
 android-application = { id = "com.android.application", version.ref = "agp" }
 # jetbrains-kotlin-android: Plugin to enable Kotlin support for Android development
@@ -71,7 +72,7 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin"}
 # jetbrains-kotlin-jvm: Plugin for enabling JVM support for Kotlin code
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
-android-library = { id = "com.android.library", version.ref = "agp" }
 
 ## convention plugins
 wms-android-library = { id = "wms.android.library", version = "unspecified"}
+wms-android-application = { id = "wms.android.application", version = "unspecified"}

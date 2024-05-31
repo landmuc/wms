@@ -24,6 +24,12 @@ dependencies {
 gradlePlugin {
     // register the convention plugin
     plugins {
+        register("androidApplication") {
+            id = "wms.android.application"
+            implementationClass = "AndroidApplicationConventionPlugin"
+        }
+    }
+    plugins {
         register("androidLibrary") {
             id = "wms.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
