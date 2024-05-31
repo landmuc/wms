@@ -75,4 +75,7 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrai
 
 ## convention plugins
 wms-android-library = { id = "wms.android.library", version = "unspecified"}
+wms-android-library-compose = { id = "wms.android.library.compose", version = "unspecified"}
 wms-android-application = { id = "wms.android.application", version = "unspecified"}
+wms-android-application-compose = { id = "wms.android.application.compose", version = "unspecified"}
+wms-android-feature = { id = "wms.android.feature", version = "unspecified"}

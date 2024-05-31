@@ -35,4 +35,22 @@ gradlePlugin {
             implementationClass = "AndroidLibraryConventionPlugin"
         }
     }
+    plugins {
+        register("androidApplicationCompose") {
+            id = "wms.android.application.compose"
+            implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
+    }
+    plugins {
+        register("androidLibraryCompose") {
+            id = "wms.android.library.compose"
+            implementationClass = "AndroidLibraryComposeConventionPlugin"
+        }
+    }
+    plugins {
+        register("androidFeature") {
+            id = "wms.android.feature"
+            implementationClass = "AndroidFeatureConventionPlugin"
+        }
+    }
 }

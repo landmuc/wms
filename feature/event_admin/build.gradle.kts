@@ -1,27 +1,13 @@
 plugins {
     // convention plugins
     alias(libs.plugins.wms.android.library)
+    alias(libs.plugins.wms.android.feature)
     // other plugins
     alias(libs.plugins.compose.compiler)
 }
 
 android {
     namespace = "com.landmuc.event_admin"
-
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
 }
 
 dependencies {
