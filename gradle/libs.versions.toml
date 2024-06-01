@@ -38,6 +38,8 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 # androidx-material3: Material Design 3 components for Compose
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+# androidx-compose-runtime: Core foundation for building Compose UI
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime"}
 
 ##
 # androidx-appcompat: This library provides compatibility features for older Android APIs on newer versions. It's generally not required for Jetpack Compose projects since Compose targets newer APIs.
@@ -60,7 +62,7 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 
 [bundles]
-compose = ["androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling-preview", "androidx-material3"]
+compose = ["androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling-preview", "androidx-material3", "androidx-compose-runtime"]
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }
