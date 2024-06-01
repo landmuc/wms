@@ -1,8 +1,11 @@
+import org.jetbrains.kotlin.gradle.idea.tcs.extras.projectArtifactsClasspathKey
+
 plugins {
     // convention plugins
     alias(libs.plugins.wms.android.application)
+    //alias(libs.plugins.wms.android.application.compose)
     // other plugins
-    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.compose.compiler) //in AndroidApplicationComposeConventionPlugin
 }
 
 android {
@@ -32,13 +35,7 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlin.get() // was 1.5.1
-        /** from nowInAndroid
-         * kotlinCompilerExtensionVersion = libs.findVersion("kotlin").get().toString()
-         */
-
-    }
+    composeOptions {}
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -47,12 +44,16 @@ android {
 }
 
 dependencies {
-    // put all modules here
-    // e.g.: implementation(projects.feature.search)
+    // Modules
+    // in nowInAndroid: implementation(projects.feature.search)
+    implementation(project(":feature:authentication"))
+    implementation(project(":feature:event_list"))
+    implementation(project(":feature:event_admin"))
+    implementation(project(":feature:event_user"))
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.runtime.ktx) // in AndroidApplicationComposeConventionPlugin
+    implementation(libs.androidx.activity.compose) // in AndroidApplicationComposeConventionPlugin
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
     // following implementations are combined in the compose bundle

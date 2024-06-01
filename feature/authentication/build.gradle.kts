@@ -1,8 +1,9 @@
 plugins {
     // convention plugins
     alias(libs.plugins.wms.android.feature)
+    // alias(libs.plugins.wms.android.library.compose)
     // other plugins
-    alias(libs.plugins.compose.compiler)
+    // alias(libs.plugins.compose.compiler) in AndroidLibraryComposeConventionPlugin
 }
 
 android {
@@ -28,8 +29,8 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    // implementation(libs.androidx.appcompat) // required?
+    // implementation(libs.material) // replace by material 3? Material 3 in AndroidLibraryComposeConventionPlugin
 
     // Testing
     testImplementation(libs.junit)
