@@ -3,9 +3,9 @@ import org.jetbrains.kotlin.gradle.idea.tcs.extras.projectArtifactsClasspathKey
 plugins {
     // convention plugins
     alias(libs.plugins.wms.android.application)
-    //alias(libs.plugins.wms.android.application.compose)
+    alias(libs.plugins.wms.android.application.compose)
     // other plugins
-    alias(libs.plugins.compose.compiler) //in AndroidApplicationComposeConventionPlugin
+    //alias(libs.plugins.compose.compiler) //in AndroidApplicationComposeConventionPlugin
 }
 
 android {
@@ -52,15 +52,11 @@ dependencies {
     implementation(project(":feature:event_user"))
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx) // in AndroidApplicationComposeConventionPlugin
-    implementation(libs.androidx.activity.compose) // in AndroidApplicationComposeConventionPlugin
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.bundles.compose)
-    // following implementations are combined in the compose bundle
-//    implementation(libs.androidx.ui)
-//    implementation(libs.androidx.ui.graphics)
-//    implementation(libs.androidx.ui.tooling.preview)
-//    implementation(libs.androidx.material3)
+//    implementation(libs.androidx.lifecycle.runtime.ktx) // in AndroidApplicationComposeConventionPlugin
+//    implementation(libs.androidx.activity.compose) // in AndroidApplicationComposeConventionPlugin
+//    implementation(platform(libs.androidx.compose.bom))
+//    implementation(libs.bundles.compose)
+
 
     // Testing
     testImplementation(libs.junit)

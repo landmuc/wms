@@ -1,7 +1,7 @@
 plugins {
     // convention plugins
     alias(libs.plugins.wms.android.feature)
-    //alias(libs.plugins.wms.android.library.compose)
+    alias(libs.plugins.wms.android.library.compose)
     // other plugins
 }
 
@@ -14,9 +14,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.bundles.compose)
 
     // Testing
     testImplementation(libs.junit)

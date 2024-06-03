@@ -1,3 +1,8 @@
+// Workaround for error while project rebuilding from https://issuetracker.google.com/issues/328871352?pli=1
+// error: Unable to make progress running work. There are items queued for execution but none of them can be started
+//gradle.startParameter.excludedTaskNames.addAll(listOf(":build-logic:convention:clean"))
+gradle.startParameter.excludedTaskNames.addAll(listOf(":build-logic:convention:testClasses"))
+
 pluginManagement {
     includeBuild("build-logic")
     repositories {

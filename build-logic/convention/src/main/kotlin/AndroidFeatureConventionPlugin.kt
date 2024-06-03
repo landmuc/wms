@@ -27,10 +27,10 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 }
             }
 
-            dependencies{
-                // put relevant dependencies for the feature modules here
-                // do not include compose dependencies
-            }
+//            dependencies{
+//                // put relevant dependencies for the feature modules here
+//                // do not include compose dependencies
+//            }
         }
     }
 }
