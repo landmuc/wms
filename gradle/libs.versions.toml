@@ -13,6 +13,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 androidxLifecycle = "2.8.1"
 androidTools = "31.4.0"
+koin-bom = "3.5.6"
 
 [libraries]
 ##
@@ -44,6 +45,13 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 # androidx-compose-runtime: Core foundation for building Compose UI
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime"}
+
+## Koin
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }
+koin-core = { module = "io.insert-koin:koin-core" }
+koin-android = { module = "io.insert-koin:koin-android" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose" }
+koin-ktor = { module = "io.insert-koin:koin-ktor" }
 
 ##
 # androidx-appcompat: This library provides compatibility features for older Android APIs on newer versions. It's generally not required for Jetpack Compose projects since Compose targets newer APIs.
@@ -87,3 +95,4 @@ wms-android-library-compose = { id = "wms.android.library.compose", version = "u
 wms-android-application = { id = "wms.android.application", version = "unspecified"}
 wms-android-application-compose = { id = "wms.android.application.compose", version = "unspecified"}
 wms-android-feature = { id = "wms.android.feature", version = "unspecified"}
+wms-android-koin = { id = "wms.android.koin", version = "unspecified"}

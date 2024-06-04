@@ -2,6 +2,7 @@ plugins {
     // convention plugins
     alias(libs.plugins.wms.android.feature)
     alias(libs.plugins.wms.android.library.compose)
+    alias(libs.plugins.wms.android.koin)
     // other plugins
     // alias(libs.plugins.compose.compiler) in AndroidLibraryComposeConventionPlugin
 }

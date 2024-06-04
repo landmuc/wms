@@ -4,6 +4,7 @@ plugins {
     // convention plugins
     alias(libs.plugins.wms.android.application)
     alias(libs.plugins.wms.android.application.compose)
+    alias(libs.plugins.wms.android.koin)
     // other plugins
     //alias(libs.plugins.compose.compiler) //in AndroidApplicationComposeConventionPlugin
 }
@@ -57,6 +58,12 @@ dependencies {
 //    implementation(platform(libs.androidx.compose.bom))
 //    implementation(libs.bundles.compose)
 
+//    // Koin
+//    implementation(platform(libs.koin.bom))
+//    implementation(libs.koin.core)
+//    implementation(libs.koin.android)
+//    implementation(libs.koin.androidx.compose)
+//    implementation(libs.koin.ktor)
 
     // Testing
     testImplementation(libs.junit)

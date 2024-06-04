@@ -57,4 +57,10 @@ gradlePlugin {
             implementationClass = "AndroidFeatureConventionPlugin"
         }
     }
+    plugins {
+        register("androidKoin") {
+            id = "wms.android.koin"
+            implementationClass = "AndroidKoinConventionPlugin"
+        }
+    }
 }
