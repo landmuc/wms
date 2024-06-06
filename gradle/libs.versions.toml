@@ -1,5 +1,6 @@
 [versions]
 agp = "8.4.1"
+supabaseBom = "2.4.3"
 kotlin = "2.0.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -13,7 +14,8 @@ appcompat = "1.7.0"
 material = "1.12.0"
 androidxLifecycle = "2.8.1"
 androidTools = "31.4.0"
-koin-bom = "3.5.6"
+koinBom = "3.5.6"
+ktor = "2.3.11"
 
 [libraries]
 ##
@@ -46,8 +48,22 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 # androidx-compose-runtime: Core foundation for building Compose UI
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime"}
 
+## Supabase
+supabase-bom = { module = "io.github.jan-tennert.supabase:bom", version.ref = "supabaseBom" }
+supabase-postgrest-kt = { module = "io.github.jan-tennert.supabase:postgrest-kt"}
+supabase-realtime-kt = { module = "io.github.jan-tennert.supabase:realtime-kt"}
+supabase-gotrue-kt = { module = "io.github.jan-tennert.supabase:gotrue-kt"}
+supabase-compose-auth = { module = "io.github.jan-tennert.supabase:compose-auth"}
+supabase-compose-auth-ui = { module = "io.github.jan-tennert.supabase:compose-auth-ui"}
+
+## Ktor
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor"}
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor"}
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
 ## Koin
-koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koinBom" }
 koin-core = { module = "io.insert-koin:koin-core" }
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose" }
@@ -88,6 +104,7 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin"}
 # jetbrains-kotlin-jvm: Plugin for enabling JVM support for Kotlin code
 #jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
 
 ## convention plugins
 wms-android-library = { id = "wms.android.library", version = "unspecified"}
