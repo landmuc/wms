@@ -113,3 +113,5 @@ wms-android-application = { id = "wms.android.application", version = "unspecifi
 wms-android-application-compose = { id = "wms.android.application.compose", version = "unspecified"}
 wms-android-feature = { id = "wms.android.feature", version = "unspecified"}
 wms-android-koin = { id = "wms.android.koin", version = "unspecified"}
+wms-android-supabase = { id = "wms.android.supabase", version = "unspecified"}
+wms-android-ktor = { id = "wms.android.ktor", version = "unspecified"}

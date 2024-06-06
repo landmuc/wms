@@ -5,9 +5,9 @@ plugins {
     alias(libs.plugins.wms.android.application)
     alias(libs.plugins.wms.android.application.compose)
     alias(libs.plugins.wms.android.koin)
+    alias(libs.plugins.wms.android.supabase)
+    alias(libs.plugins.wms.android.ktor)
     // other plugins
-    //alias(libs.plugins.compose.compiler) //in AndroidApplicationComposeConventionPlugin
-    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
@@ -66,19 +66,19 @@ dependencies {
 //    implementation(libs.koin.androidx.compose)
 //    implementation(libs.koin.ktor)
 
-    //Supabase
-    implementation(platform(libs.supabase.bom))
-    implementation(libs.supabase.postgrest.kt)
-    implementation(libs.supabase.realtime.kt)
-    implementation(libs.supabase.gotrue.kt)
-    implementation(libs.supabase.compose.auth)
-    implementation(libs.supabase.compose.auth.ui)
-
-    //Ktor
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.okhttp)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.serialization.kotlinx.json)
+//    //Supabase
+//    implementation(platform(libs.supabase.bom))
+//    implementation(libs.supabase.postgrest.kt)
+//    implementation(libs.supabase.realtime.kt)
+//    implementation(libs.supabase.gotrue.kt)
+//    implementation(libs.supabase.compose.auth)
+//    implementation(libs.supabase.compose.auth.ui)
+//
+//    //Ktor
+//    implementation(libs.ktor.client.core)
+//    implementation(libs.ktor.client.okhttp)
+//    implementation(libs.ktor.client.content.negotiation)
+//    implementation(libs.ktor.serialization.kotlinx.json)
 
     // Testing
     testImplementation(libs.junit)

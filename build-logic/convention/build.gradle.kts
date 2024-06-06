@@ -26,7 +26,7 @@ dependencies {
 }
 
 gradlePlugin {
-    // register the convention plugin
+    // register the convention plugins
     plugins {
         register("androidApplication") {
             id = "wms.android.application"
@@ -61,6 +61,18 @@ gradlePlugin {
         register("androidKoin") {
             id = "wms.android.koin"
             implementationClass = "AndroidKoinConventionPlugin"
+        }
+    }
+    plugins {
+        register("androidSupabase") {
+            id = "wms.android.supabase"
+            implementationClass = "AndroidSupabaseConventionPlugin"
+        }
+    }
+    plugins {
+        register("androidKtor") {
+            id = "wms.android.ktor"
+            implementationClass = "AndroidKtorConventionPlugin"
         }
     }
 }
