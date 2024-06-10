@@ -1,5 +1,8 @@
 [versions]
 agp = "8.4.1"
+googleCredentials = "1.5.0-alpha01"
+googleid = "1.1.0"
+navigationCompose = "2.8.0-beta02"
 supabaseBom = "2.4.3"
 kotlin = "2.0.0"
 coreKtx = "1.13.1"
@@ -27,6 +30,8 @@ androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecyc
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 #
 androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+# Compose Navigation
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 
 ## Jetpack Compose & Material 3
 # androidx-compose-bom: Bill of Materials (BOM) for Jetpack Compose, manages dependeny versions
@@ -69,6 +74,11 @@ koin-android = { module = "io.insert-koin:koin-android" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose" }
 koin-ktor = { module = "io.insert-koin:koin-ktor" }
 
+## Google Credential Manager
+androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "googleCredentials" }
+androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "googleCredentials" }
+googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
+
 ##
 # androidx-appcompat: This library provides compatibility features for older Android APIs on newer versions. It's generally not required for Jetpack Compose projects since Compose targets newer APIs.
 # This library was automatically added on the first app launch
@@ -103,7 +113,8 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 # compose-compiler: Plugin for compiling Compose code
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin"}
 # jetbrains-kotlin-jvm: Plugin for enabling JVM support for Kotlin code
-#jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+# jetbrains-kotlin-serialization: Plugin for enabling serialization support for Kotlin code
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
 
 ## convention plugins

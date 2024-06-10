@@ -48,37 +48,22 @@ android {
 dependencies {
     // Modules
     // in nowInAndroid: implementation(projects.feature.search)
+    implementation(project(":core:network"))
+
     implementation(project(":feature:authentication"))
     implementation(project(":feature:event_list"))
     implementation(project(":feature:event_admin"))
     implementation(project(":feature:event_user"))
 
     implementation(libs.androidx.core.ktx)
-//    implementation(libs.androidx.lifecycle.runtime.ktx) // in AndroidApplicationComposeConventionPlugin
-//    implementation(libs.androidx.activity.compose) // in AndroidApplicationComposeConventionPlugin
-//    implementation(platform(libs.androidx.compose.bom))
-//    implementation(libs.bundles.compose)
 
-//    // Koin
-//    implementation(platform(libs.koin.bom))
-//    implementation(libs.koin.core)
-//    implementation(libs.koin.android)
-//    implementation(libs.koin.androidx.compose)
-//    implementation(libs.koin.ktor)
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
 
-//    //Supabase
-//    implementation(platform(libs.supabase.bom))
-//    implementation(libs.supabase.postgrest.kt)
-//    implementation(libs.supabase.realtime.kt)
-//    implementation(libs.supabase.gotrue.kt)
-//    implementation(libs.supabase.compose.auth)
-//    implementation(libs.supabase.compose.auth.ui)
-//
-//    //Ktor
-//    implementation(libs.ktor.client.core)
-//    implementation(libs.ktor.client.okhttp)
-//    implementation(libs.ktor.client.content.negotiation)
-//    implementation(libs.ktor.serialization.kotlinx.json)
+    // Google Credential Manager
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
 
     // Testing
     testImplementation(libs.junit)
