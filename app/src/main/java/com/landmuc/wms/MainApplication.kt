@@ -11,16 +11,11 @@ class MainApplication : Application() {
    override fun onCreate() {
        super.onCreate()
 
-       // List of Koin Modules
-       val moduleList = listOf(
-           supabaseClientModule
-       )
-
        startKoin {
            androidLogger() // Log Koin into Android logger
            androidContext(this@MainApplication)
 
-           modules(moduleList)
+           modules(sharedModule)
        }
 
    }

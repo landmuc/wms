@@ -12,11 +12,14 @@ plugins {
 
 android {
     namespace = "com.landmuc.wms"
+    compileSdkPreview = "VanillaIceCream"
 
     defaultConfig {
         applicationId = "com.landmuc.wms"
         versionCode = 1
         versionName = "1.0"
+
+        targetSdkPreview = "VanillaIceCream"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
