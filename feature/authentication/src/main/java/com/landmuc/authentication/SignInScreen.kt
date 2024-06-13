@@ -6,8 +6,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,12 +18,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.landmuc.authentication.di.signInViewModelModule
 import io.github.jan.supabase.annotations.SupabaseExperimental
 import io.github.jan.supabase.compose.auth.ui.ProviderButtonContent
-import io.github.jan.supabase.compose.auth.ui.ProviderIcon
 import io.github.jan.supabase.compose.auth.ui.email.OutlinedEmailField
 import io.github.jan.supabase.compose.auth.ui.password.OutlinedPasswordField
 import io.github.jan.supabase.compose.auth.ui.password.rememberPasswordRuleList
@@ -45,9 +49,17 @@ fun SignInScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("WMS")
-        Text("-")
-        Text("always up to date")
+        Text(
+            text = "WMS",
+            fontWeight = FontWeight.ExtraBold,
+            fontSize = 25.sp
+        )
+        Text(text = "always up to date")
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+        )
         OutlinedEmailField(
             value = email,
             onValueChange = viewModel::onEmailChanged,
@@ -62,16 +74,17 @@ fun SignInScreen(
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(8.dp)
+                .height(20.dp)
         )
-        // SEPERATE WITH A STRAIGHT LINE
-
-        OutlinedButton(
-            onClick = { /*TODO*/ }, // Sign in with Google
-        ) {
-            ProviderIcon(provider = Google, contentDescription = "Google")
-        }
-
+        HorizontalDivider(
+            modifier = Modifier.width(200.dp),
+            thickness = 2.dp
+        )
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(25.dp)
+        )
         OutlinedButton(
             onClick = { /*TODO*/ }, // Sign in with Google
             content = { ProviderButtonContent(provider = Google)}

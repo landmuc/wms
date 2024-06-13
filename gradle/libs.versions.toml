@@ -1,6 +1,6 @@
 [versions]
-agp = "8.4.1"
-googleCredentials = "1.5.0-alpha01"
+agp = "8.4.2"
+googleCredentials = "1.2.2"
 googleid = "1.1.0"
 navigationCompose = "2.8.0-beta02"
 supabaseBom = "2.4.3"
