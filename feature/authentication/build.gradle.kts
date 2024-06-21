@@ -13,6 +13,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:network"))
+
     implementation(libs.androidx.core.ktx)
 //    implementation(libs.androidx.appcompat) // required?
 //    implementation(libs.material) // replace by material 3? Material 3 in AndroidLibraryComposeConventionPlugin
