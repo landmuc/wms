@@ -8,4 +8,8 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
+
+    // Testing
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
 }

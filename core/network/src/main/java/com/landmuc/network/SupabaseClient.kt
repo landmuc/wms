@@ -9,14 +9,14 @@ import io.github.jan.supabase.realtime.Realtime
 
 object SupabaseClient {
     val supabaseClient = createSupabaseClient(
-        supabaseUrl = "",
-        supabaseKey = ""
+        supabaseUrl = BuildConfig.SUPABASE_URL,
+        supabaseKey = BuildConfig.SUPABASE_KEY
     ) {
         install(Postgrest)
         install(Auth)
         install(Realtime)
         install(ComposeAuth) {
-            googleNativeLogin(serverClientId = "")
+            googleNativeLogin(serverClientId = BuildConfig.SERVER_CLIENT_ID)
         }
     }
 }

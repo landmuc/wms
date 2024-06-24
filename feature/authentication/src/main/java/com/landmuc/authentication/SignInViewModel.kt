@@ -11,8 +11,6 @@ import kotlinx.coroutines.flow.update
 class SignInViewModel(
     private val client: SupabaseClient
 ): ViewModel() {
-    private val _userState = MutableStateFlow("User not logged in!")
-    val userState = _userState.asStateFlow()
 
     private val _email = MutableStateFlow("")
     val email = _email.asStateFlow()
@@ -28,22 +26,6 @@ class SignInViewModel(
         _password.update { password }
     }
 
-    fun checkGoogleLoginStatus(context: Context, result: NativeSignInResult) {
-        when(result) {
-            is NativeSignInResult.Success -> {
-                _userState.value = "Logged in via Google"
-            }
-            is NativeSignInResult.ClosedByUser -> {}
-            is NativeSignInResult.Error -> {
-                val message = result.message
-                _userState.value = result.message
-            }
-            is NativeSignInResult.NetworkError -> {
-                val message = result.message
-                _userState.value = result.message
-            }
-        }
-    }
 
 }
 

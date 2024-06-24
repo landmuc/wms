@@ -30,13 +30,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.credentials.CredentialManager
 import androidx.credentials.GetCredentialRequest
-import androidx.lifecycle.viewModelScope
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import com.landmuc.authentication.di.signInViewModelModule
+import com.landmuc.network.BuildConfig
 import com.landmuc.network.SupabaseClient
 import io.github.jan.supabase.annotations.SupabaseExperimental
+import io.github.jan.supabase.compose.auth.composable.NativeSignInResult
 import io.github.jan.supabase.compose.auth.composable.rememberSignInWithGoogle
 import io.github.jan.supabase.compose.auth.composeAuth
 import io.github.jan.supabase.compose.auth.ui.ProviderButtonContent
@@ -48,7 +49,6 @@ import io.github.jan.supabase.gotrue.providers.Google
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.KoinApplication
-import org.koin.compose.rememberCurrentKoinScope
 import java.security.MessageDigest
 import java.util.UUID
 
@@ -60,10 +60,26 @@ fun SignInScreen(
     val context = LocalContext.current
     val client = SupabaseClient.supabaseClient
     val action = client.composeAuth.rememberSignInWithGoogle(
-        onResult = {result -> viewModel.checkGoogleLoginStatus(context, result)},
-        fallback = {}
+        onResult = { result -> //optional error handling
+            when (result) {
+                is NativeSignInResult.Success -> {
+                    Toast.makeText(context, "You are signed in!", Toast.LENGTH_SHORT).show()
+                }
+                is NativeSignInResult.ClosedByUser -> {
+                    Toast.makeText(context,"ClosedByUser", Toast.LENGTH_SHORT).show()
+                }
+                is NativeSignInResult.Error -> {
+                    Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
+                }
+                is NativeSignInResult.NetworkError -> {
+                    Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        },
+        fallback = { // optional: add custom error handling, not required by default
+
+        }
     )
-    val userState by viewModel.userState.collectAsState()
 
     val controller = LocalSoftwareKeyboardController.current
 
@@ -122,9 +138,11 @@ fun SignInScreen(
             content = { ProviderButtonContent(provider = Google)}
         )
         GoogleSignInButton()
-        Text(text = userState)
-        Button(onClick = { action.startFlow() }) {
-           Text(text = "Google Supabase Sign In Test!")
+
+        Button(
+            onClick = { action.startFlow() }
+        ) {
+            Text("Google ComposeAuth Login")
         }
 
 
@@ -150,7 +168,7 @@ fun GoogleSignInButton() {
 
     val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
         .setFilterByAuthorizedAccounts(false)
-        .setServerClientId("")
+        .setServerClientId(BuildConfig.SERVER_CLIENT_ID)
         .setNonce(hashedNonce) // random piece of string you can pass to a OAuth sign in process to prevent replay attacks
         .build()
 

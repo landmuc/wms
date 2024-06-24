@@ -11,4 +11,8 @@ dependencies {
     api(project(":core:domain"))
 
     implementation(libs.androidx.core.ktx)
+
+    // Testing
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
 }
