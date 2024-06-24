@@ -16,7 +16,7 @@ object SupabaseClient {
         install(Auth)
         install(Realtime)
         install(ComposeAuth) {
-            googleNativeLogin(serverClientId = BuildConfig.SERVER_CLIENT_ID)
+            //googleNativeLogin(serverClientId = BuildConfig.SERVER_CLIENT_ID)
         }
     }
 }

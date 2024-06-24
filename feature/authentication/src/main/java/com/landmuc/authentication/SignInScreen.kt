@@ -34,8 +34,10 @@ import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import com.landmuc.authentication.di.signInViewModelModule
+import com.landmuc.domain.model.Event
 import com.landmuc.network.BuildConfig
 import com.landmuc.network.SupabaseClient
+import com.landmuc.network.model.EventDto
 import io.github.jan.supabase.annotations.SupabaseExperimental
 import io.github.jan.supabase.compose.auth.composable.NativeSignInResult
 import io.github.jan.supabase.compose.auth.composable.rememberSignInWithGoogle
@@ -45,7 +47,11 @@ import io.github.jan.supabase.compose.auth.ui.email.OutlinedEmailField
 import io.github.jan.supabase.compose.auth.ui.password.OutlinedPasswordField
 import io.github.jan.supabase.compose.auth.ui.password.PasswordRule
 import io.github.jan.supabase.compose.auth.ui.password.rememberPasswordRuleList
+import io.github.jan.supabase.exceptions.RestException
+import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.Google
+import io.github.jan.supabase.gotrue.providers.builtin.IDToken
+import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.KoinApplication
@@ -58,28 +64,8 @@ fun SignInScreen(
     viewModel: SignInViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
-    val client = SupabaseClient.supabaseClient
-    val action = client.composeAuth.rememberSignInWithGoogle(
-        onResult = { result -> //optional error handling
-            when (result) {
-                is NativeSignInResult.Success -> {
-                    Toast.makeText(context, "You are signed in!", Toast.LENGTH_SHORT).show()
-                }
-                is NativeSignInResult.ClosedByUser -> {
-                    Toast.makeText(context,"ClosedByUser", Toast.LENGTH_SHORT).show()
-                }
-                is NativeSignInResult.Error -> {
-                    Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
-                }
-                is NativeSignInResult.NetworkError -> {
-                    Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
-                }
-            }
-        },
-        fallback = { // optional: add custom error handling, not required by default
+    val client = SupabaseClient
 
-        }
-    )
 
     val controller = LocalSoftwareKeyboardController.current
 
@@ -137,21 +123,41 @@ fun SignInScreen(
             onClick = { },
             content = { ProviderButtonContent(provider = Google)}
         )
-        GoogleSignInButton()
-
-        Button(
-            onClick = { action.startFlow() }
-        ) {
-            Text("Google ComposeAuth Login")
-        }
-
+        GoogleSignInButton(supabase = client)
+        InsertButton(supabase = client)
 
     }
 }
 
+@Composable
+fun InsertButton(supabase: SupabaseClient) {
+    val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
+
+    val testEvent = EventDto(
+        title = "Testing Supabase Auth with RLS"
+    )
+
+    val onClick: () -> Unit = {
+       coroutineScope.launch {
+           try {
+               supabase.supabaseClient.from("wms_events").insert(testEvent)
+               Toast.makeText(context, "New Event inserted", Toast.LENGTH_SHORT).show()
+           } catch (e: RestException) {
+               Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
+           }
+       }
+    }
+
+    Button(onClick = onClick) {
+        Text(text = "Insert Row")
+    }
+}
 
 @Composable
-fun GoogleSignInButton() {
+fun GoogleSignInButton(
+    supabase: SupabaseClient
+) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
@@ -186,7 +192,12 @@ fun GoogleSignInButton() {
             val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
             val googleIdToken = googleIdTokenCredential.idToken
 
-            Log.i(TAG, googleIdToken)
+            supabase.supabaseClient.auth.signInWith(IDToken) {
+                idToken = googleIdToken
+                provider = Google
+                nonce = rawNonce
+            }
+
             Toast.makeText(context, "You are signed in!", Toast.LENGTH_SHORT).show()
         } catch (e: androidx.credentials.exceptions.GetCredentialException) {
             Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
