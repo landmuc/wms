@@ -66,6 +66,26 @@ fun SignInScreen(
     val context = LocalContext.current
     val client = SupabaseClient
 
+    val action = client.supabaseClient.composeAuth.rememberSignInWithGoogle(
+        onResult = { result -> //optional error handling
+            when (result) {
+                is NativeSignInResult.Success -> {
+                    Toast.makeText(context, "You are signed in!", Toast.LENGTH_SHORT).show()
+                }
+                is NativeSignInResult.ClosedByUser -> {}
+                is NativeSignInResult.Error -> {
+                    Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
+                }
+                is NativeSignInResult.NetworkError -> {
+                    Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        },
+        fallback = { // optional: add custom error handling, not required by default
+
+        }
+    )
+
 
     val controller = LocalSoftwareKeyboardController.current
 
@@ -120,7 +140,7 @@ fun SignInScreen(
                 .height(25.dp)
         )
         OutlinedButton(
-            onClick = { },
+            onClick = { action.startFlow()},
             content = { ProviderButtonContent(provider = Google)}
         )
         GoogleSignInButton(supabase = client)
