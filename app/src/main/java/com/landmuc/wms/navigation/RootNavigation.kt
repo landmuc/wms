@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.landmuc.authentication.SignInScreen
+import com.landmuc.authentication.SignUpScreen
 
 @Composable
 fun RootNavigation() {
@@ -24,10 +25,17 @@ fun RootNavigation() {
             modifier = Modifier.padding(it)
         ) {
             composable<Route.SignInScreen> {
-                SignInScreen()
+                SignInScreen(
+                    onSignInClick = { navController.navigate(Route.EventListScreen) },
+                    onSignUpClick = { navController.navigate(Route.SignUpScreen) }
+                )
             }
 
-            composable<Route.SignUpScreen> {  }
+            composable<Route.SignUpScreen> {
+                SignUpScreen(
+                    onBackClick = { navController.navigate(Route.SignInScreen)}
+                )
+            }
 
             composable<Route.EventListScreen> {  }
 
