@@ -20,36 +20,36 @@ class SignUpViewModel(
     private val confirmPassword: ConfirmPassword
 ): ViewModel() {
 
-    private val _emailInput = MutableStateFlow("")
-    val emailInput: StateFlow<String> = _emailInput.asStateFlow()
+    private val _email = MutableStateFlow("")
+    val email: StateFlow<String> = _email.asStateFlow()
 
-    private val _passwordInput = MutableStateFlow("")
-    val passwordInput = _passwordInput.asStateFlow()
+    private val _password = MutableStateFlow("")
+    val password = _password.asStateFlow()
 
-    private val _passwordConfirmInput = MutableStateFlow("")
-    val passwordConfirmInput = _passwordConfirmInput.asStateFlow()
+    private val _passwordConfirm = MutableStateFlow("")
+    val passwordConfirm = _passwordConfirm.asStateFlow()
 
 
-    fun updateEmailInput(email: String) {
-        _emailInput.update { email }
+    fun onEmailChanged(email: String) {
+        _email.update { email }
     }
-    fun updatePasswordInput(password: String) {
-        _passwordInput.update { password }
+    fun onPasswordChanged(password: String) {
+        _password.update { password }
     }
-    fun updatePasswordConfirmInput(password: String) {
-        _passwordConfirmInput.update { password }
+    fun onPasswordConfirmChanged(password: String) {
+        _passwordConfirm.update { password }
     }
 
     fun signUp(onResult: (SignUpResult) -> Unit, ) {
-        if (!validateEmail(_emailInput.value)) { return onResult(SignUpResult.InvalidEmail) }
+        if (!validateEmail(_email.value)) { return onResult(SignUpResult.InvalidEmail) }
 
-        if (!validatePassword(_passwordInput.value)) { return onResult(SignUpResult.InvalidPassword) }
+        if (!validatePassword(_password.value)) { return onResult(SignUpResult.InvalidPassword) }
 
-        if (!confirmPassword(_passwordInput.value, _passwordConfirmInput.value)) { return onResult(SignUpResult.InvalidPasswordMatch) }
+        if (!confirmPassword(_password.value, _passwordConfirm.value)) { return onResult(SignUpResult.InvalidPasswordMatch) }
 
-        if (validateEmail(_emailInput.value) &&
-            validatePassword(_passwordInput.value) &&
-            confirmPassword(_passwordInput.value, _passwordConfirmInput.value)
+        if (validateEmail(_email.value) &&
+            validatePassword(_password.value) &&
+            confirmPassword(_password.value, _passwordConfirm.value)
         ) { return onResult(SignUpResult.ValidCredentials) }
     }
 
@@ -57,8 +57,8 @@ class SignUpViewModel(
         viewModelScope.launch {
             val signUpResult =
                 authRep.signUp(
-                    email = _emailInput.value,
-                    password = _passwordInput.value
+                    email = _email.value,
+                    password = _password.value
                 )
             onResult(signUpResult)
         }

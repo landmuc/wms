@@ -122,13 +122,6 @@ fun SignInScreen(
                 value = password,
                 onValueChange = viewModel::onPasswordChanged,
                 label = { Text(stringResource(id = R.string.feature_authentication_label_password)) },
-                rules = rememberPasswordRuleList(
-                    PasswordRule.minLength(8),
-                    PasswordRule.containsSpecialCharacter(),
-                    PasswordRule.containsDigit(),
-                    PasswordRule.containsUppercase(),
-                    PasswordRule.containsLowercase()
-                )
             )
             Button(
                 onClick = {

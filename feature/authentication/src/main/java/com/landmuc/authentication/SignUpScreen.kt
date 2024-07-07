@@ -38,10 +38,15 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.landmuc.domain.event.SignUpResult
+import io.github.jan.supabase.annotations.SupabaseExperimental
+import io.github.jan.supabase.compose.auth.ui.email.OutlinedEmailField
+import io.github.jan.supabase.compose.auth.ui.password.OutlinedPasswordField
+import io.github.jan.supabase.compose.auth.ui.password.PasswordRule
+import io.github.jan.supabase.compose.auth.ui.password.rememberPasswordRuleList
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(SupabaseExperimental::class, ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpScreen(
     onBackClick: () -> Unit,
@@ -52,9 +57,9 @@ fun SignUpScreen(
 
     val controller = LocalSoftwareKeyboardController.current
 
-    val email by viewModel.emailInput.collectAsState()
-    val password by viewModel.passwordInput.collectAsState()
-    val passwordConfirm by viewModel.passwordConfirmInput.collectAsState()
+    val email by viewModel.email.collectAsState()
+    val password by viewModel.password.collectAsState()
+    val passwordConfirm by viewModel.passwordConfirm.collectAsState()
 
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
@@ -82,72 +87,51 @@ fun SignUpScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // text field to enter email for sign up
-            OutlinedTextField(
-                singleLine = true,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp, 4.dp)
-                    .border(
-                        BorderStroke(width = 2.dp, color = MaterialTheme.colorScheme.primaryContainer),
-                        shape = RoundedCornerShape(50)
-                    ),
+            OutlinedEmailField(
                 value = email,
-                onValueChange = viewModel::updateEmailInput,
-                placeholder = { Text("Email") },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Email,
-                        contentDescription = "Email"
-                    )
-                }
+                onValueChange = viewModel::onEmailChanged,
+                label = { Text(stringResource(id = R.string.feature_authentication_label_email)) },
             )
+
             // text field to enter password for sign up
-            OutlinedTextField(
-                singleLine = true,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp, 4.dp)
-                    .border(
-                        BorderStroke(width = 2.dp, color = MaterialTheme.colorScheme.primaryContainer),
-                        shape = RoundedCornerShape(50)
-                    ),
+            OutlinedPasswordField(
                 value = password,
-                onValueChange = viewModel::updatePasswordInput,
-                placeholder = { Text("Password") },
-                leadingIcon =  { Icon(
-                    imageVector = Icons.Default.Lock,
-                    contentDescription = "Password"
-                )},
-                visualTransformation = PasswordVisualTransformation() // masks the password input
+                onValueChange = viewModel::onPasswordChanged,
+                label = { Text(stringResource(id = R.string.feature_authentication_label_password)) },
+                rules = rememberPasswordRuleList(
+                    PasswordRule.minLength(8),
+                    PasswordRule.containsSpecialCharacter(),
+                    PasswordRule.containsDigit(),
+                    PasswordRule.containsUppercase(),
+                    PasswordRule.containsLowercase()
+                )
             )
-            // text field to confirm password above
-            OutlinedTextField(
-                singleLine = true,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp, 4.dp)
-                    .border(
-                        BorderStroke(width = 2.dp, color = MaterialTheme.colorScheme.primaryContainer),
-                        shape = RoundedCornerShape(50)
-                    ),
+
+            // text field to confirm the password above
+            OutlinedPasswordField(
                 value = passwordConfirm,
-                onValueChange = viewModel::updatePasswordConfirmInput,
-                placeholder = { Text("Confirm Password") },
-                leadingIcon =  { Icon(
-                    imageVector = Icons.Default.Lock,
-                    contentDescription = "Confirm Password"
-                )},
-                visualTransformation = PasswordVisualTransformation() // masks the password input
+                onValueChange = viewModel::onPasswordConfirmChanged,
+                label = { Text(stringResource(id = R.string.feature_authentication_label_password)) },
+                rules = rememberPasswordRuleList(
+                    PasswordRule.minLength(8),
+                    PasswordRule.containsSpecialCharacter(),
+                    PasswordRule.containsDigit(),
+                    PasswordRule.containsUppercase(),
+                    PasswordRule.containsLowercase()
+                )
             )
+
             Spacer(modifier = Modifier
                 .fillMaxWidth()
                 .padding(12.dp)
             )
+
             Button(
                 onClick = {
                     controller?.hide()
                     viewModel.signUp { signUpResult ->
                         when (signUpResult) {
+                            // could be removed, gets checked now in OutlinedEmailField
                             is SignUpResult.InvalidEmail -> {
                                 scope.launch {
                                     snackbarHostState.showSnackbar(
@@ -156,6 +140,7 @@ fun SignUpScreen(
                                     )
                                 }
                             }
+                            // could be removed, gets checked now in OutlinedPasswordField
                             is SignUpResult.InvalidPassword -> {
                                 scope.launch {
                                     snackbarHostState.showSnackbar(
