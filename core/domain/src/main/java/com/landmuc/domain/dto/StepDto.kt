@@ -1,4 +1,4 @@
-package com.landmuc.network.model
+package com.landmuc.domain.dto
 
 import kotlinx.serialization.Serializable
 

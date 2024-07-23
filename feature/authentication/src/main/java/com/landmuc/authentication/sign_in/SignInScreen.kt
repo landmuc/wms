@@ -1,4 +1,4 @@
-package com.landmuc.authentication
+package com.landmuc.authentication.sign_in
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -31,12 +31,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.landmuc.authentication.di.signInViewModelModule
+import com.landmuc.authentication.R
 import com.landmuc.network.SupabaseClient
-import com.landmuc.network.model.EventDto
+import com.landmuc.domain.dto.EventDto
 import io.github.jan.supabase.annotations.SupabaseExperimental
 import io.github.jan.supabase.compose.auth.composable.NativeSignInResult
 import io.github.jan.supabase.compose.auth.composable.rememberSignInWithGoogle
@@ -44,18 +43,16 @@ import io.github.jan.supabase.compose.auth.composeAuth
 import io.github.jan.supabase.compose.auth.ui.ProviderButtonContent
 import io.github.jan.supabase.compose.auth.ui.email.OutlinedEmailField
 import io.github.jan.supabase.compose.auth.ui.password.OutlinedPasswordField
-import io.github.jan.supabase.compose.auth.ui.password.PasswordRule
-import io.github.jan.supabase.compose.auth.ui.password.rememberPasswordRuleList
 import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.gotrue.providers.Google
 import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.KoinApplication
 
 @OptIn(SupabaseExperimental::class, ExperimentalMaterial3Api::class)
 @Composable
 fun SignInScreen(
+    onSuccessfulGoogleLogIn: () -> Unit,
     onSignInClick: () -> Unit,
     onSignUpClick: () -> Unit,
     viewModel: SignInViewModel = koinViewModel()
@@ -68,6 +65,7 @@ fun SignInScreen(
             when (result) {
                 is NativeSignInResult.Success -> {
                     Toast.makeText(context, "You are signed in!", Toast.LENGTH_SHORT).show()
+                    onSuccessfulGoogleLogIn()
                 }
 
                 is NativeSignInResult.ClosedByUser -> {}

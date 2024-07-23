@@ -1,13 +1,9 @@
-package com.landmuc.authentication
+package com.landmuc.authentication.sign_in
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.landmuc.domain.repository.AuthenticationRepository
 import com.landmuc.network.SupabaseClient
-import io.github.jan.supabase.compose.auth.composable.NativeSignInResult
-import io.github.jan.supabase.compose.auth.composable.rememberSignInWithGoogle
-import io.github.jan.supabase.compose.auth.composeAuth
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -15,7 +11,6 @@ import kotlinx.coroutines.launch
 
 class SignInViewModel(
     private val authRep: AuthenticationRepository,
-    private val client: SupabaseClient
 ): ViewModel() {
 
     private val _email = MutableStateFlow("")

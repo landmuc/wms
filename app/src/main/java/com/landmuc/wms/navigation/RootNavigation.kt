@@ -9,8 +9,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.landmuc.authentication.SignInScreen
-import com.landmuc.authentication.SignUpScreen
+import com.landmuc.authentication.sign_in.SignInScreen
+import com.landmuc.authentication.sign_up.SignUpScreen
+import com.landmuc.event_admin.EventAdminScreen
+import com.landmuc.event_list.EventListScreen
 
 @Composable
 fun RootNavigation() {
@@ -26,6 +28,7 @@ fun RootNavigation() {
         ) {
             composable<Route.SignInScreen> {
                 SignInScreen(
+                    onSuccessfulGoogleLogIn = { navController.navigate(Route.EventListScreen) },
                     onSignInClick = { navController.navigate(Route.EventListScreen) },
                     onSignUpClick = { navController.navigate(Route.SignUpScreen) }
                 )
@@ -37,9 +40,9 @@ fun RootNavigation() {
                 )
             }
 
-            composable<Route.EventListScreen> {  }
+            composable<Route.EventListScreen> { EventListScreen() }
 
-            composable<Route.EventAdminScreen> {  }
+            composable<Route.EventAdminScreen> { EventAdminScreen() }
 
             composable<Route.EventStepAdminScreen> {  }
 

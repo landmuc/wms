@@ -1,4 +1,4 @@
-package com.landmuc.authentication
+package com.landmuc.authentication.sign_up
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

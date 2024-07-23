@@ -1,7 +1,7 @@
 package com.landmuc.authentication.di
 
-import com.landmuc.authentication.SignInViewModel
-import com.landmuc.authentication.SignUpViewModel
+import com.landmuc.authentication.sign_in.SignInViewModel
+import com.landmuc.authentication.sign_up.SignUpViewModel
 import com.landmuc.domain.use_case.ConfirmPassword
 import com.landmuc.domain.use_case.ValidateEmail
 import com.landmuc.domain.use_case.ValidatePassword
@@ -15,11 +15,11 @@ val useCaseModule = module {
 }
 
 val signInViewModelModule = module {
-    viewModel { SignInViewModel(get(), get()) }
+    viewModel { SignInViewModel(get()) }
 }
 
 val signUpViewModelModule = module {
-    viewModel { SignUpViewModel(get(), get(), get(), get())}
+    viewModel { SignUpViewModel(get(), get(), get(), get()) }
 }
 
 val authenticationModule = module {

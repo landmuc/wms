@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.wms.android.feature)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
@@ -7,6 +8,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.kotlinx.serialization.json)
+
     implementation(libs.androidx.core.ktx)
 
     // Testing
