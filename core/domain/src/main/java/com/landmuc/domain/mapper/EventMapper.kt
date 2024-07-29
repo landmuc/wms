@@ -5,7 +5,7 @@ import com.landmuc.domain.model.Event
 
 fun EventDto.toEvent(): Event {
     return Event(
-//        eventId = eventId,
+        eventId = eventId,
         title = title,
         description = description ?: "No description",
 //        createdBy = createdBy,

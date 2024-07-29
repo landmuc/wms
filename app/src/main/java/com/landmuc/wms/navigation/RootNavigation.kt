@@ -13,6 +13,7 @@ import com.landmuc.authentication.sign_in.SignInScreen
 import com.landmuc.authentication.sign_up.SignUpScreen
 import com.landmuc.event_admin.EventAdminScreen
 import com.landmuc.event_list.EventListScreen
+import com.landmuc.event_user.EventUserScreen
 
 @Composable
 fun RootNavigation() {
@@ -46,7 +47,7 @@ fun RootNavigation() {
 
             composable<Route.EventStepAdminScreen> {  }
 
-            composable<Route.EventUserScreen> {  }
+            composable<Route.EventUserScreen> { EventUserScreen() }
 
             composable<Route.EventStepUserScreen> {  }
         }

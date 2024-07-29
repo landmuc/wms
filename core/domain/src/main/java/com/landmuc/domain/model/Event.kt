@@ -3,7 +3,7 @@ package com.landmuc.domain.model
 import java.util.UUID
 
 data class Event (
-//    val eventId: UUID,
+    val eventId: UUID,
     val title: String,
     val description: String,
 //    val createdBy: User,

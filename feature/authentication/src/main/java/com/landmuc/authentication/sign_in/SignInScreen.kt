@@ -183,36 +183,36 @@ fun SignInScreen(
             }
         }
 
-        InsertButton(supabase = client)
+        //InsertButton(supabase = client)
 
     }
 }
 
 
-@Composable
-fun InsertButton(supabase: SupabaseClient) {
-    val coroutineScope = rememberCoroutineScope()
-    val context = LocalContext.current
-
-    val testEvent = EventDto(
-        title = "Testing Supabase Auth with RLS"
-    )
-
-    val onClick: () -> Unit = {
-       coroutineScope.launch {
-           try {
-               supabase.supabaseClient.from("wms_events").insert(testEvent)
-               Toast.makeText(context, "New Event inserted", Toast.LENGTH_SHORT).show()
-           } catch (e: RestException) {
-               Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
-           }
-       }
-    }
-
-    Button(onClick = onClick) {
-        Text(text = "Insert Row")
-    }
-}
+//@Composable
+//fun InsertButton(supabase: SupabaseClient) {
+//    val coroutineScope = rememberCoroutineScope()
+//    val context = LocalContext.current
+//
+//    val testEvent = EventDto(
+//        title = "Testing Supabase Auth with RLS"
+//    )
+//
+//    val onClick: () -> Unit = {
+//       coroutineScope.launch {
+//           try {
+//               supabase.supabaseClient.from("wms_events").insert(testEvent)
+//               Toast.makeText(context, "New Event inserted", Toast.LENGTH_SHORT).show()
+//           } catch (e: RestException) {
+//               Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
+//           }
+//       }
+//    }
+//
+//    Button(onClick = onClick) {
+//        Text(text = "Insert Row")
+//    }
+//}
 
 
 //@Composable

@@ -6,8 +6,8 @@ import java.util.UUID
 
 @Serializable
 data class EventDto (
-//    @Serializable(with = UUIDAsStringSerializer::class)
-//    val eventId: UUID,
+    @Serializable(with = UUIDAsStringSerializer::class)
+    val eventId: UUID,
     val title: String,
     val description: String? = null,
 //    @Serializable(with = UUIDAsStringSerializer::class)
