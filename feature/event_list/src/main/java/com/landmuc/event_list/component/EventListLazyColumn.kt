@@ -11,6 +11,7 @@ import com.landmuc.domain.model.Event
 @Composable
 fun EventListLazyColumn(
     eventList: List<Event>,
+    onEventClick: (Event) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -19,7 +20,7 @@ fun EventListLazyColumn(
         items(items = eventList) {event ->
             EventListCard(
                 eventTitle = event.title,
-                onEventClick = { /*TODO*/ }
+                onEventClick = { onEventClick(event) }
             )
         }
     }

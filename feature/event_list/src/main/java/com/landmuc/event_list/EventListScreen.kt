@@ -11,11 +11,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.landmuc.domain.model.Event
 import com.landmuc.event_list.component.EventListLazyColumn
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun EventListScreen(
+    onEventClick: (Event) -> Unit,
     viewModel: EventListViewModel = koinViewModel()
 ) {
     val eventList by viewModel.eventList.collectAsState()
@@ -30,7 +32,8 @@ fun EventListScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         EventListLazyColumn(
-            eventList = eventList
+            eventList = eventList,
+            onEventClick = { event ->  onEventClick(event) }
         )
     }
 }

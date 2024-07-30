@@ -7,6 +7,7 @@ import com.landmuc.domain.model.Event
 import com.landmuc.domain.repository.EventDataRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class EventListViewModel(
@@ -19,7 +20,8 @@ class EventListViewModel(
     fun getEventList() {
         viewModelScope.launch {
             val list = eventDataRep.getEventList().map { eventDto -> eventDto.toEvent() }
-            _eventList.value = list
+            //_eventList.value = list
+            _eventList.update { list }
         }
     }
 }

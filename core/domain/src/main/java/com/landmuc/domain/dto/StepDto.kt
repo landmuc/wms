@@ -6,7 +6,7 @@ import java.util.UUID
 
 @Serializable
 data class StepDto (
-//    val stepId: String,
+//    val stepId: UUID,
     val title: String,
 //    val description: String,
 //    val createdBy: UserDto,
@@ -14,7 +14,7 @@ data class StepDto (
 //    val timeCreated: String,
 //    val stepDate: String,
 //    val stepTime: String,
-//    @Serializable(with = UUIDAsStringSerializer::class)
-//    val eventId: UUID
+    @Serializable(with = UUIDAsStringSerializer::class)
+    val eventId: UUID
 )
 

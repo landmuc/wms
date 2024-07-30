@@ -1,7 +1,9 @@
 package com.landmuc.domain.model
 
+import java.util.UUID
+
 data class Step (
-//    val stepId: String,
+//    val stepId: UUID,
     val title: String,
 //    val description: String,
 //    val createdBy: User,
@@ -9,5 +11,5 @@ data class Step (
 //    val timeCreated: String,
 //    val stepDate: String,
 //    val stepTime: String,
-//    val eventId: String
+    val eventId: UUID
 )

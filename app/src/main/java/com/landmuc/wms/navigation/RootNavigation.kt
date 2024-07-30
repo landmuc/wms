@@ -41,7 +41,11 @@ fun RootNavigation() {
                 )
             }
 
-            composable<Route.EventListScreen> { EventListScreen() }
+            composable<Route.EventListScreen> {
+                EventListScreen(
+                    onEventClick = { navController.navigate(Route.EventUserScreen)}
+                )
+            }
 
             composable<Route.EventAdminScreen> { EventAdminScreen() }
 
