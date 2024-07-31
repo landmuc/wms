@@ -22,6 +22,7 @@ sealed class Route() {
 
     @Serializable
     data class EventUserScreen(
+        val eventTitle: String,
         val eventId: String
     )
 

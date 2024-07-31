@@ -74,11 +74,11 @@ fun SignUpScreen(
         }
     ) { innerPadding ->
         Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // text field to enter email for sign up
             OutlinedEmailField(

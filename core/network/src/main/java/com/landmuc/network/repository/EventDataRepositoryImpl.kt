@@ -26,11 +26,11 @@ class EventDataRepositoryImpl(
 
     // regarding steps
     override suspend fun getStepList(eventId: UUID): List<StepDto> {
-        return client.supabaseClient.postgrest.from("wms_steps").select().decodeList<StepDto>()
+        return client.supabaseClient.postgrest.from("wms_steps").select() {
+            filter {
+                Step::eventId eq eventId
+            }
+        }.decodeList<StepDto>()
     }
 
 }
-
-//            filter {
-//                Step::eventId eq eventId
-//            }

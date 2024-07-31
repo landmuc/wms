@@ -38,14 +38,19 @@ fun RootNavigation() {
 
             composable<Route.SignUpScreen> {
                 SignUpScreen(
-                    onBackClick = { navController.navigate(Route.SignInScreen)}
+                    onBackClick = { navController.navigateUp()}
                 )
             }
 
             composable<Route.EventListScreen> {
                 EventListScreen(
                     onEventClick = { event ->
-                        navController.navigate(Route.EventUserScreen(eventId = event.eventId.toString()))
+                        navController.navigate(
+                            Route.EventUserScreen(
+                                eventTitle = event.title,
+                                eventId = event.eventId.toString()
+                            )
+                        )
                     }
                 )
             }
@@ -57,6 +62,8 @@ fun RootNavigation() {
             composable<Route.EventUserScreen> {
                 val args = it.toRoute<Route.EventUserScreen>()
                 EventUserScreen(
+                    onBackClick = {navController.navigateUp()},
+                    eventTitle = args.eventTitle,
                     eventIdAsString = args.eventId
                 )
             }
