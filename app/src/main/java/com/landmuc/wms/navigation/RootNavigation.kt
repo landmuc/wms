@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.landmuc.authentication.sign_in.SignInScreen
 import com.landmuc.authentication.sign_up.SignUpScreen
 import com.landmuc.event_admin.EventAdminScreen
@@ -21,11 +22,11 @@ fun RootNavigation() {
 
     Scaffold(
         modifier = Modifier.fillMaxSize()
-    ) {
+    ) { innerPadding ->
         NavHost(
             navController = navController,
             startDestination = Route.SignInScreen,
-            modifier = Modifier.padding(it)
+            modifier = Modifier.padding(innerPadding)
         ) {
             composable<Route.SignInScreen> {
                 SignInScreen(
@@ -43,7 +44,9 @@ fun RootNavigation() {
 
             composable<Route.EventListScreen> {
                 EventListScreen(
-                    onEventClick = { navController.navigate(Route.EventUserScreen)}
+                    onEventClick = { event ->
+                        navController.navigate(Route.EventUserScreen(eventId = event.eventId.toString()))
+                    }
                 )
             }
 
@@ -51,7 +54,12 @@ fun RootNavigation() {
 
             composable<Route.EventStepAdminScreen> {  }
 
-            composable<Route.EventUserScreen> { EventUserScreen() }
+            composable<Route.EventUserScreen> {
+                val args = it.toRoute<Route.EventUserScreen>()
+                EventUserScreen(
+                    eventIdAsString = args.eventId
+                )
+            }
 
             composable<Route.EventStepUserScreen> {  }
         }

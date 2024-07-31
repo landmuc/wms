@@ -1,6 +1,8 @@
 package com.landmuc.wms.navigation
 
+import com.landmuc.domain.serializer.UUIDAsStringSerializer
 import kotlinx.serialization.Serializable
+import java.util.UUID
 
 sealed class Route() {
     @Serializable
@@ -19,7 +21,9 @@ sealed class Route() {
     object EventStepAdminScreen
 
     @Serializable
-    object EventUserScreen
+    data class EventUserScreen(
+        val eventId: String
+    )
 
     @Serializable
     object EventStepUserScreen

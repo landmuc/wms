@@ -13,6 +13,6 @@ fun StepDto.toStep(): Step {
 //        timeCreated = timeCreated,
 //        stepDate = stepDate,
 //        stepTime = stepTime,
-//        eventId = eventId
+        eventId = eventId
     )
 }

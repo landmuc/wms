@@ -5,6 +5,7 @@ import io.github.jan.supabase.compose.auth.googleNativeLogin
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.postgrest.Postgrest
+import io.github.jan.supabase.postgrest.PropertyConversionMethod
 import io.github.jan.supabase.realtime.Realtime
 
 object SupabaseClient {
@@ -12,7 +13,9 @@ object SupabaseClient {
         supabaseUrl = BuildConfig.SUPABASE_URL,
         supabaseKey = BuildConfig.SUPABASE_KEY
     ) {
-        install(Postgrest)
+        install(Postgrest) {
+            propertyConversionMethod = PropertyConversionMethod.NONE
+        }
         install(Auth)
         install(Realtime)
         install(ComposeAuth) {
