@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_event_user_clock_icon_description">Clock Icon</string>
+    <string name="feature_event_user_place_icon_description">Place Icon</string>
+</resources>

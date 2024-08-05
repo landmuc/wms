@@ -64,7 +64,7 @@ fun SignInScreen(
         onResult = { result -> //optional error handling
             when (result) {
                 is NativeSignInResult.Success -> {
-                    Toast.makeText(context, "You are signed in!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, context.getString(R.string.feature_authentication_you_are_signed_in), Toast.LENGTH_SHORT).show()
                     onSuccessfulGoogleLogIn()
                 }
 
@@ -79,7 +79,6 @@ fun SignInScreen(
             }
         },
         fallback = { // optional: add custom error handling, not required by default
-
         }
     )
 
@@ -130,7 +129,7 @@ fun SignInScreen(
                         } else {
                             scope.launch {
                                 snackbarHostState.showSnackbar(
-                                    message = "Invalid email and/or password!",
+                                    message = context.getString(R.string.feature_authentication_invalid_email_and_or_password),
                                     duration = SnackbarDuration.Short
                                 )
                             }
@@ -177,7 +176,7 @@ fun SignInScreen(
                     .padding(horizontal = 16.dp)
             ) {
                 Text(
-                    text = "Sign Up",
+                    text = stringResource(id = R.string.feature_authentication_sign_up),
                     fontSize = 16.sp
                 )
             }
