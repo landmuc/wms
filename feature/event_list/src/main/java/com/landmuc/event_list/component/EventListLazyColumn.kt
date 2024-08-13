@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.landmuc.domain.model.Event
+import kotlinx.datetime.LocalDate
 
 @Composable
 fun EventListLazyColumn(
@@ -20,6 +21,7 @@ fun EventListLazyColumn(
         items(items = eventList) {event ->
             EventListCard(
                 eventTitle = event.title,
+                eventDate = event.eventDate,
                 onEventClick = { onEventClick(event) }
             )
         }

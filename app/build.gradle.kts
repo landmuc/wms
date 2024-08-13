@@ -75,6 +75,9 @@ dependencies {
     // Navigation
     implementation(libs.androidx.navigation.compose)
 
+    // Kotlinx DateTime
+    implementation(libs.kotlinx.datetime)
+
     // Google Credential Manager
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)

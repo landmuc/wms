@@ -23,6 +23,12 @@ class SignUpViewModel(
     private val _email = MutableStateFlow("")
     val email: StateFlow<String> = _email.asStateFlow()
 
+    private val _name = MutableStateFlow("")
+    val name = _name.asStateFlow()
+
+    private val _surname = MutableStateFlow("")
+    val surname = _surname.asStateFlow()
+
     private val _password = MutableStateFlow("")
     val password = _password.asStateFlow()
 
@@ -32,6 +38,12 @@ class SignUpViewModel(
 
     fun onEmailChanged(email: String) {
         _email.update { email }
+    }
+    fun onNameChanged(name: String) {
+        _name.update { name }
+    }
+    fun onSurnameChanged(surname: String) {
+        _surname.update { surname }
     }
     fun onPasswordChanged(password: String) {
         _password.update { password }
@@ -62,6 +74,14 @@ class SignUpViewModel(
                 )
             onResult(signUpResult)
         }
+    }
+
+    fun addUserToDatabase(
+        email: String,
+        name: String,
+        surname: String
+    ) {
+        viewModelScope.launch{}
     }
 
 }

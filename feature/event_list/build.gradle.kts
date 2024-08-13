@@ -16,6 +16,7 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
+    implementation(libs.kotlinx.datetime)
 //    implementation(libs.androidx.appcompat)
 
     // Testing

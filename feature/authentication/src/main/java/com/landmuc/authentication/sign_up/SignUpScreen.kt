@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -28,9 +29,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.landmuc.authentication.R
+import com.landmuc.authentication.di.signUpViewModelModule
 import com.landmuc.domain.event.SignUpResult
 import io.github.jan.supabase.annotations.SupabaseExperimental
 import io.github.jan.supabase.compose.auth.ui.email.OutlinedEmailField
@@ -39,6 +42,7 @@ import io.github.jan.supabase.compose.auth.ui.password.PasswordRule
 import io.github.jan.supabase.compose.auth.ui.password.rememberPasswordRuleList
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.KoinApplication
 
 @OptIn(SupabaseExperimental::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -52,6 +56,8 @@ fun SignUpScreen(
     val controller = LocalSoftwareKeyboardController.current
 
     val email by viewModel.email.collectAsState()
+    val name by viewModel.name.collectAsState()
+    val surname by viewModel.surname.collectAsState()
     val password by viewModel.password.collectAsState()
     val passwordConfirm by viewModel.passwordConfirm.collectAsState()
 
@@ -59,14 +65,14 @@ fun SignUpScreen(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
-                title = { Text("Sign Up")},
+                title = { stringResource(id = R.string.feature_authentication_sign_up)},
                 navigationIcon = {
                     IconButton(
                         onClick = onBackClick
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(id = R.string.feature_authentication_back)
                         )
                     }
                 }
@@ -85,6 +91,20 @@ fun SignUpScreen(
                 value = email,
                 onValueChange = viewModel::onEmailChanged,
                 label = { Text(stringResource(id = R.string.feature_authentication_label_email)) },
+            )
+
+            // text field to enter name for sign up
+            OutlinedTextField(
+                value = name,
+                onValueChange = viewModel::onNameChanged,
+                label = { Text(stringResource(id = R.string.feature_authentication_label_name)}
+            )
+
+            // text field to enter surname for sign up
+            OutlinedTextField(
+                value = surname,
+                onValueChange = viewModel::onSurnameChanged,
+                label = { Text(stringResource(id = R.string.feature_authentication_label_surname)) }
             )
 
             // text field to enter password for sign up
@@ -186,5 +206,16 @@ fun SignUpScreen(
                 )
             }
         }
+    }
+}
+
+
+@Preview
+@Composable
+fun SignUpScreenPreview() {
+    KoinApplication(
+        application = { modules(signUpViewModelModule)}
+    ) {
+        SignUpScreen(onBackClick = { /*TODO*/ })
     }
 }

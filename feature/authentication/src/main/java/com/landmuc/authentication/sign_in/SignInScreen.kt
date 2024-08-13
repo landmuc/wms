@@ -31,9 +31,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.landmuc.authentication.R
+import com.landmuc.authentication.di.signInViewModelModule
 import com.landmuc.network.SupabaseClient
 import com.landmuc.domain.dto.EventDto
 import io.github.jan.supabase.annotations.SupabaseExperimental
@@ -48,6 +50,7 @@ import io.github.jan.supabase.gotrue.providers.Google
 import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.KoinApplication
 
 @OptIn(SupabaseExperimental::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -220,6 +223,10 @@ fun SignInScreen(
 //    KoinApplication(
 //        application = { modules(signInViewModelModule) }
 //    ) {
-//        SignInScreen()
+//        SignInScreen(
+//            onSuccessfulGoogleLogIn = {},
+//            onSignUpClick = {},
+//            onSignInClick = {}
+//        )
 //    }
 //}

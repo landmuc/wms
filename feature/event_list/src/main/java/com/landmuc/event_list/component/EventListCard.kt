@@ -21,10 +21,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.datetime.LocalDate
 
 @Composable
 fun EventListCard(
     eventTitle: String,
+    eventDate: LocalDate,
     onEventClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -60,7 +62,7 @@ fun EventListCard(
                         modifier = Modifier.weight(1.0f),
                         text = "Lars U."
                     )
-                    Text(text = "Date: 05.08.2024")
+                    Text(text = "Date: $eventDate")
                 }
             }
         }
@@ -72,6 +74,8 @@ fun EventListCard(
 fun PreviewEventListCard() {
     EventListCard(
         eventTitle = "Preview Event",
+        eventDate = LocalDate(2024,7,11),
         onEventClick = {}
     )
 }
+
