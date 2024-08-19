@@ -5,12 +5,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -97,14 +101,36 @@ fun SignUpScreen(
             OutlinedTextField(
                 value = name,
                 onValueChange = viewModel::onNameChanged,
-                label = { Text(stringResource(id = R.string.feature_authentication_label_name)}
+                label = { Text(stringResource(id = R.string.feature_authentication_label_name))},
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Person,
+                        contentDescription = "Name"
+                    )
+                }
+            )
+
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .height(12.dp)
             )
 
             // text field to enter surname for sign up
             OutlinedTextField(
                 value = surname,
                 onValueChange = viewModel::onSurnameChanged,
-                label = { Text(stringResource(id = R.string.feature_authentication_label_surname)) }
+                label = { Text(stringResource(id = R.string.feature_authentication_label_surname)) },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Person,
+                        contentDescription = "Surname"
+                    )
+                }
+            )
+
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .height(12.dp)
             )
 
             // text field to enter password for sign up
@@ -137,7 +163,17 @@ fun SignUpScreen(
 
             Spacer(modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp)
+                .height(10.dp)
+            )
+
+            HorizontalDivider(
+                modifier = Modifier.width(200.dp),
+                thickness = 2.dp
+            )
+
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .height(22.dp)
             )
 
             Button(
@@ -179,6 +215,20 @@ fun SignUpScreen(
                                                 message = "You successfully signed up! Log in on the first screen!",
                                                 duration = SnackbarDuration.Long
                                             )
+
+                                            viewModel.sendNewUserInfoToDatabase(
+                                                name = name,
+                                                surname = surname,
+                                                email = email
+                                            )
+                                        }
+
+                                        scope.launch {
+                                            viewModel.onEmailChanged("")
+                                            viewModel.onNameChanged("")
+                                            viewModel.onSurnameChanged("")
+                                            viewModel.onPasswordChanged("")
+                                            viewModel.onPasswordConfirmChanged("")
                                         }
                                     } else {
                                         scope.launch {

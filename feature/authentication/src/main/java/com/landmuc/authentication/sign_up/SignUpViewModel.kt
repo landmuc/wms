@@ -76,12 +76,18 @@ class SignUpViewModel(
         }
     }
 
-    fun addUserToDatabase(
-        email: String,
+    fun sendNewUserInfoToDatabase(
         name: String,
-        surname: String
+        surname: String,
+        email: String
     ) {
-        viewModelScope.launch{}
+        viewModelScope.launch{
+            authRep.sendNewUserInfoToDatabase(
+                name = name,
+                surname = surname,
+                email = email
+            )
+        }
     }
 
 }
