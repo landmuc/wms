@@ -215,7 +215,8 @@ fun SignUpScreen(
                                                 message = "You successfully signed up! Log in on the first screen!",
                                                 duration = SnackbarDuration.Long
                                             )
-
+                                        }
+                                        scope.launch {
                                             viewModel.sendNewUserInfoToDatabase(
                                                 name = name,
                                                 surname = surname,

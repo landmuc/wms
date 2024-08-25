@@ -6,6 +6,7 @@ import com.landmuc.network.SupabaseClient
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
 import io.github.jan.supabase.postgrest.from
+import java.util.UUID
 
 class AuthenticationRepositoryImpl(
     private val client: SupabaseClient
@@ -47,14 +48,24 @@ class AuthenticationRepositoryImpl(
         surname: String,
         email: String
     ): Boolean {
-        val newUser = NewUserDto(
-            name = name,
-            surname = surname,
-            email = email
-        )
 
         return try {
-            client.supabaseClient.from("wms_users").insert(newUser)
+            val user = client.supabaseClient.auth.currentUserOrNull()
+            val userIdAsString = user?.id
+            val userIdAsUUID = UUID.fromString(userIdAsString)
+
+            client.supabaseClient.from("wms_users").update(
+                {
+                    set("name", name)
+                    set("surname", surname)
+                    set("email", email)
+                }
+            ) {
+                filter {
+                    eq("id",userIdAsUUID )
+                }
+            }
+
             true
         }
         catch (e: Exception) {

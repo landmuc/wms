@@ -184,9 +184,6 @@ fun SignInScreen(
                 )
             }
         }
-
-        //InsertButton(supabase = client)
-
     }
 }
 
