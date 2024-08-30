@@ -27,16 +27,22 @@ class SignInViewModel(
         _password.update { password }
     }
 
-    fun signIn(onResult: (Boolean) -> Unit ) {
+    fun signIn(signInResult: (Boolean) -> Unit ) {
         viewModelScope.launch {
-            val signInResult =
+            val successfulSignIn =
                 authRep.signIn(
                     email = _email.value,
                     password = _password.value
                 )
-            onResult( signInResult )
+            signInResult( successfulSignIn )
         }
     }
 
+    fun checkFirstLogInWithGoogle(onResult: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            val isNameNull = authRep.checkFirstLogInWithGoogle()
+            onResult(isNameNull)
+        }
+    }
 }
 

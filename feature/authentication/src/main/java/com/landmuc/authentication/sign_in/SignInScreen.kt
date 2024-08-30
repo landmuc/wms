@@ -23,8 +23,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -35,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.landmuc.authentication.R
+import com.landmuc.authentication.component.UserInputDialog
 import com.landmuc.authentication.di.signInViewModelModule
 import com.landmuc.network.SupabaseClient
 import com.landmuc.domain.dto.EventDto
@@ -63,12 +66,21 @@ fun SignInScreen(
     val context = LocalContext.current
     val client = SupabaseClient
 
-    val action = client.supabaseClient.composeAuth.rememberSignInWithGoogle(
+    var showOverlay by remember { mutableStateOf(false) }
+
+    val googleSignIn = client.supabaseClient.composeAuth.rememberSignInWithGoogle(
         onResult = { result -> //optional error handling
             when (result) {
                 is NativeSignInResult.Success -> {
-                    Toast.makeText(context, context.getString(R.string.feature_authentication_you_are_signed_in), Toast.LENGTH_SHORT).show()
-                    onSuccessfulGoogleLogIn()
+                    //Toast.makeText(context, context.getString(R.string.feature_authentication_you_are_signed_in), Toast.LENGTH_SHORT).show()
+                    viewModel.checkFirstLogInWithGoogle { onResult ->
+                        if (onResult) {
+                            showOverlay = true
+                            Toast.makeText(context, "Enter your name and surname", Toast.LENGTH_SHORT).show()
+                        } else {
+                            onSuccessfulGoogleLogIn()
+                        }
+                    }
                 }
 
                 is NativeSignInResult.ClosedByUser -> {}
@@ -95,6 +107,9 @@ fun SignInScreen(
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { padding ->
+        if (showOverlay) {
+            UserInputDialog()
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -165,7 +180,7 @@ fun SignInScreen(
                     .height(25.dp)
             )
             OutlinedButton(
-                onClick = { action.startFlow() },
+                onClick = { googleSignIn.startFlow() },
                 content = { ProviderButtonContent(provider = Google) }
             )
             Spacer(
