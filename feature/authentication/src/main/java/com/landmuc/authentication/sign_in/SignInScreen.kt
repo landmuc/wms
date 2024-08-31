@@ -66,8 +66,18 @@ fun SignInScreen(
     val context = LocalContext.current
     val client = SupabaseClient
 
-    var showOverlay by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+    val controller = LocalSoftwareKeyboardController.current
 
+    val email by viewModel.email.collectAsState()
+    val password by viewModel.password.collectAsState()
+    val name by viewModel.name.collectAsState()
+    val surname by viewModel.surname.collectAsState()
+    val showOverlay by viewModel.showOverlay.collectAsState()
+
+
+    // handling Google sign in
     val googleSignIn = client.supabaseClient.composeAuth.rememberSignInWithGoogle(
         onResult = { result -> //optional error handling
             when (result) {
@@ -75,7 +85,7 @@ fun SignInScreen(
                     //Toast.makeText(context, context.getString(R.string.feature_authentication_you_are_signed_in), Toast.LENGTH_SHORT).show()
                     viewModel.checkFirstLogInWithGoogle { onResult ->
                         if (onResult) {
-                            showOverlay = true
+                            viewModel.switchOverlayVisibility()
                             Toast.makeText(context, "Enter your name and surname", Toast.LENGTH_SHORT).show()
                         } else {
                             onSuccessfulGoogleLogIn()
@@ -93,22 +103,27 @@ fun SignInScreen(
                 }
             }
         },
-        fallback = { // optional: add custom error handling, not required by default
+        fallback = {
+        // optional: add custom error handling, not required by default
         }
     )
 
-    val scope = rememberCoroutineScope()
-    val snackbarHostState = remember { SnackbarHostState() }
-    val controller = LocalSoftwareKeyboardController.current
-
-    val email by viewModel.email.collectAsState()
-    val password by viewModel.password.collectAsState()
-
+    // actual Screen
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { padding ->
         if (showOverlay) {
-            UserInputDialog()
+            UserInputDialog(
+                onDismissRequest = { viewModel.switchOverlayVisibility() },
+                name = name,
+                onNameChanged = viewModel::onNameChanged,
+                surname = surname,
+                onSurnameChanged = viewModel::onSurnameChanged,
+                onSubmit = {
+                    viewModel.sendNewGoogleUserInfoToDatabase(name = name, surname = surname)
+                    onSuccessfulGoogleLogIn()
+                }
+                )
         }
         Column(
             modifier = Modifier

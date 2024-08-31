@@ -97,4 +97,34 @@ class AuthenticationRepositoryImpl(
        }
     }
 
+    override suspend fun sendNewGoogleUserInfoToDatabase(
+        name: String,
+        surname: String
+    ): Boolean {
+        return try {
+            val user = client.supabaseClient.auth.currentUserOrNull()
+            val userIdAsString = user?.id
+            val userIdAsUUID = UUID.fromString(userIdAsString)
+
+            val userEmail = user?.email
+
+            client.supabaseClient.from("wms_users").update(
+                {
+                    set("name", name)
+                    set("surname", surname)
+                    set("email", userEmail)
+                }
+            ) {
+                filter {
+                    eq("id",userIdAsUUID )
+                }
+            }
+            true
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+
 }

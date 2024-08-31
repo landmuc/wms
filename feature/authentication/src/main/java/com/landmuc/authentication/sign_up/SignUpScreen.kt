@@ -101,6 +101,7 @@ fun SignUpScreen(
             OutlinedTextField(
                 value = name,
                 onValueChange = viewModel::onNameChanged,
+                singleLine = true,
                 label = { Text(stringResource(id = R.string.feature_authentication_label_name))},
                 leadingIcon = {
                     Icon(
@@ -119,6 +120,7 @@ fun SignUpScreen(
             OutlinedTextField(
                 value = surname,
                 onValueChange = viewModel::onSurnameChanged,
+                singleLine = true,
                 label = { Text(stringResource(id = R.string.feature_authentication_label_surname)) },
                 leadingIcon = {
                     Icon(
