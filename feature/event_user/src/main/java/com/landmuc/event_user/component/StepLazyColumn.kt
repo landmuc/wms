@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.landmuc.domain.model.Step
 
 @Composable
-fun EventUserLazyColumn(
+fun StepLazyColumn(
     stepList: List<Step>,
     modifier: Modifier = Modifier
 ) {
@@ -17,9 +17,9 @@ fun EventUserLazyColumn(
         modifier = modifier.padding(top = 20.dp, bottom = 20.dp)
     ) {
         items(items = stepList) { step ->
-            EventUserCard(
-                stepTitle = step.title,
-                onEventClick = { /*TODO*/ }
+            StepCard(
+                step = step,
+                onStepClick = { /*TODO*/ }
             )
         }
     }

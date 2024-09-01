@@ -269,6 +269,6 @@ fun SignUpScreenPreview() {
     KoinApplication(
         application = { modules(signUpViewModelModule)}
     ) {
-        SignUpScreen(onBackClick = { /*TODO*/ })
+        SignUpScreen(onBackClick = { })
     }
 }

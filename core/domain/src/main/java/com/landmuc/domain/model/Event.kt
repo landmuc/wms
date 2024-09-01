@@ -13,6 +13,7 @@ data class Event (
     val timeCreated: LocalTime,
     val eventDate: LocalDate,
     val eventTime: LocalTime,
+    val isOngoing: Boolean,
 //    val stepList: List<Step>,
 //    val adminList: List<User>,
 //    val userList: List<User>

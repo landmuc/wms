@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,9 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.landmuc.domain.model.Event
-import com.landmuc.domain.model.Step
-import com.landmuc.event_user.component.EventUserLazyColumn
+import com.landmuc.event_user.component.StepLazyColumn
 import org.koin.androidx.compose.koinViewModel
 import java.util.UUID
 
@@ -69,7 +66,7 @@ fun EventUserScreen(
                 .padding(innerPadding)
         ) {
             Text(text = "EventTitle - EventUserScreen")
-            EventUserLazyColumn(
+            StepLazyColumn(
                 stepList = stepList
             )
         }

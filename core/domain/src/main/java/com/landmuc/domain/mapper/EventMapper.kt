@@ -13,8 +13,9 @@ fun EventDto.toEvent(): Event {
 //        createdBy = createdBy,
         dateCreated = dateCreated,
         timeCreated = timeCreated,
-        eventDate = eventDate ?: LocalDate(9999, 99, 99),
-        eventTime = eventTime ?: LocalTime(99, 99, 99),
+        eventDate = eventDate ?: LocalDate(12, 12, 12),
+        eventTime = eventTime ?: LocalTime(12, 12, 12),
+        isOngoing = false,
 //        stepList = "",
 //        adminList = "",
 //        userList = ""
