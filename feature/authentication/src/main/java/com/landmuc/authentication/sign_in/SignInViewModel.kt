@@ -2,6 +2,7 @@ package com.landmuc.authentication.sign_in
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.landmuc.domain.mapper.toUser
 import com.landmuc.domain.repository.AuthenticationRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -53,14 +54,16 @@ class SignInViewModel(
                     email = _email.value,
                     password = _password.value
                 )
-            signInResult( successfulSignIn )
+            signInResult(successfulSignIn)
         }
     }
 
     fun checkFirstLogInWithGoogle(onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
-            val isNameNull = authRep.checkFirstLogInWithGoogle()
-            onResult(isNameNull)
+            val googleUser = authRep.getGoogleUser()
+            val googleUserName: String? = googleUser.name
+
+            onResult(googleUserName == null)
         }
     }
 

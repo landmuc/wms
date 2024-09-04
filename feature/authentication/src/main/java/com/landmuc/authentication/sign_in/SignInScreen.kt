@@ -82,13 +82,13 @@ fun SignInScreen(
         onResult = { result -> //optional error handling
             when (result) {
                 is NativeSignInResult.Success -> {
-                    //Toast.makeText(context, context.getString(R.string.feature_authentication_you_are_signed_in), Toast.LENGTH_SHORT).show()
                     viewModel.checkFirstLogInWithGoogle { onResult ->
                         if (onResult) {
                             viewModel.switchOverlayVisibility()
                             Toast.makeText(context, "Enter your name and surname", Toast.LENGTH_SHORT).show()
                         } else {
                             onSuccessfulGoogleLogIn()
+                            Toast.makeText(context, context.getString(R.string.feature_authentication_you_are_signed_in), Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -216,32 +216,6 @@ fun SignInScreen(
         }
     }
 }
-
-
-//@Composable
-//fun InsertButton(supabase: SupabaseClient) {
-//    val coroutineScope = rememberCoroutineScope()
-//    val context = LocalContext.current
-//
-//    val testEvent = EventDto(
-//        title = "Testing Supabase Auth with RLS"
-//    )
-//
-//    val onClick: () -> Unit = {
-//       coroutineScope.launch {
-//           try {
-//               supabase.supabaseClient.from("wms_events").insert(testEvent)
-//               Toast.makeText(context, "New Event inserted", Toast.LENGTH_SHORT).show()
-//           } catch (e: RestException) {
-//               Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
-//           }
-//       }
-//    }
-//
-//    Button(onClick = onClick) {
-//        Text(text = "Insert Row")
-//    }
-//}
 
 
 //@Composable

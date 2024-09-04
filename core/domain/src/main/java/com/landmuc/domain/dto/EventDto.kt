@@ -13,7 +13,7 @@ data class EventDto (
     @SerialName("event_id")
     val eventId: UUID,
     val title: String,
-    val description: String? = null,
+    val description: String? = null, //TODO: Delete = null (initial value does not need to be null)
 //    @Serializable(with = UUIDAsStringSerializer::class)
 //    val createdBy: UUID,
     @SerialName("date_created")
