@@ -1,6 +1,6 @@
 package com.landmuc.domain.dto
 
-import com.landmuc.domain.serializer.UUIDAsStringSerializer
+import com.landmuc.domain.serializer.UUIDSerializer
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import kotlinx.serialization.Serializable
@@ -16,7 +16,7 @@ data class StepDto (
 //    val timeCreated: String,
     val stepDate: LocalDate? = null,
     val stepTime: LocalTime? = null,
-    @Serializable(with = UUIDAsStringSerializer::class)
+    @Serializable(with = UUIDSerializer::class)
     val eventId: UUID
 )
 

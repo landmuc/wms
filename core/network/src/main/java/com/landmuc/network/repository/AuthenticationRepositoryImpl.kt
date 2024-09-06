@@ -26,7 +26,7 @@ class AuthenticationRepositoryImpl(
             }
             true
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e("ETAG", "An error occurred", e)
             false
         }
     }
@@ -42,7 +42,7 @@ class AuthenticationRepositoryImpl(
             }
             true
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e("ETAG", "An error occurred", e)
             false
         }
     }
@@ -71,22 +71,22 @@ class AuthenticationRepositoryImpl(
             true
         }
         catch (e: Exception) {
-            e.printStackTrace()
+            Log.e("ETAG", "An error occurred", e)
             false
         }
     }
 
     //TODO: Implement try{} catch{}
     override suspend fun getGoogleUser(): UserDto {
-           val user = client.supabaseClient.auth.currentUserOrNull()
-           val userIdAsString = user?.id
-           val userIdAsUUID = UUID.fromString(userIdAsString)
+        val user = client.supabaseClient.auth.currentUserOrNull()
+        val userIdAsString = user?.id
+        val userIdAsUUID = UUID.fromString(userIdAsString)
 
-           return client.supabaseClient.postgrest.from("wms_users").select() {
-                   filter {
-                       eq("id", userIdAsUUID)
-                   }
-               }.decodeSingle<UserDto>()
+        return client.supabaseClient.postgrest.from("wms_users").select() {
+            filter {
+                eq("id", userIdAsUUID)
+            }
+        }.decodeSingle<UserDto>()
        }
 
 
@@ -116,7 +116,7 @@ class AuthenticationRepositoryImpl(
             true
         }
         catch (e: Exception) {
-            e.printStackTrace()
+            Log.e("ETAG", "An error occurred", e)
             false
         }
     }

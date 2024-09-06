@@ -1,6 +1,6 @@
 package com.landmuc.domain.dto
 
-import com.landmuc.domain.serializer.UUIDAsStringSerializer
+import com.landmuc.domain.serializer.UUIDSerializer
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import kotlinx.serialization.SerialName
@@ -9,7 +9,7 @@ import java.util.UUID
 
 @Serializable
 data class EventDto (
-    @Serializable(with = UUIDAsStringSerializer::class)
+    @Serializable(with = UUIDSerializer::class)
     @SerialName("event_id")
     val eventId: UUID,
     val title: String,

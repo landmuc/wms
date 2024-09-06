@@ -6,7 +6,8 @@ import java.util.UUID
 
 interface EventDataRepository {
     // regarding events
-    suspend fun getEventList(): List<EventDto>
+    suspend fun getAllEvents(): List<EventDto>
+    suspend fun getFollowedEvents(): List<EventDto>
     suspend fun createEvent()
     suspend fun searchEvent()
 

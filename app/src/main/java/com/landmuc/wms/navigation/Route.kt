@@ -1,8 +1,6 @@
 package com.landmuc.wms.navigation
 
-import com.landmuc.domain.serializer.UUIDAsStringSerializer
 import kotlinx.serialization.Serializable
-import java.util.UUID
 
 sealed class Route() {
     @Serializable

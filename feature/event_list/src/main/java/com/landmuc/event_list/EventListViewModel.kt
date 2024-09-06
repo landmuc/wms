@@ -19,7 +19,14 @@ class EventListViewModel(
 
     fun getEventList() {
         viewModelScope.launch {
-            val list = eventDataRep.getEventList().map { eventDto -> eventDto.toEvent() }
+            val list = eventDataRep.getAllEvents().map { eventDto -> eventDto.toEvent() }
+            _eventList.update { list }
+        }
+    }
+
+    fun getFollowedEvents() {
+        viewModelScope.launch {
+            val list = eventDataRep.getFollowedEvents().map { eventDto -> eventDto.toEvent() }
             _eventList.update { list }
         }
     }
