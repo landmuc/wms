@@ -1,4 +1,4 @@
-package com.landmuc.event_list
+package com.landmuc.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,24 +10,30 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class EventListViewModel(
+class SearchViewModel(
     private val eventDataRep: EventDataRepository
 ): ViewModel() {
 
-    private val _eventList: MutableStateFlow<List<Event>> = MutableStateFlow(listOf())
-    val eventList = _eventList.asStateFlow()
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery = _searchQuery.asStateFlow()
+
+    private val _searchFilteredEventList: MutableStateFlow<List<Event>> = MutableStateFlow(listOf())
+    val searchFilteredEventList = _searchFilteredEventList.asStateFlow()
+
+    fun onSearchQueryChanged(searchQuery: String) {
+        _searchQuery.update { searchQuery }
+    }
 
     fun getAllEvents() {
         viewModelScope.launch {
             val list = eventDataRep.getAllEvents().map { eventDto -> eventDto.toEvent() }
-            _eventList.update { list }
+            _searchFilteredEventList.update { list }
         }
     }
 
-    fun getFollowedEvents() {
+    fun getSearchFilteredEvents(searchQuery: String) {
         viewModelScope.launch {
-            val list = eventDataRep.getFollowedEvents().map { eventDto -> eventDto.toEvent() }
-            _eventList.update { list }
+            eventDataRep.getSearchFilteredEvents(searchQuery)
         }
     }
 }

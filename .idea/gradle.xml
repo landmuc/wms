@@ -33,6 +33,7 @@
             <option value="$PROJECT_DIR$/feature/event_admin" />
             <option value="$PROJECT_DIR$/feature/event_list" />
             <option value="$PROJECT_DIR$/feature/event_user" />
+            <option value="$PROJECT_DIR$/feature/search" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

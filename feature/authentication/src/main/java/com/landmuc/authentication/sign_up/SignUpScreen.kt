@@ -76,7 +76,7 @@ fun SignUpScreen(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                            contentDescription = stringResource(id = R.string.feature_authentication_back)
+                            contentDescription = stringResource(id = R.string.feature_authentication_content_description_back)
                         )
                     }
                 }

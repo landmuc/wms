@@ -7,7 +7,7 @@
     <string name="feature_authentication_you_are_signed_in">You are signed in!</string>
     <string name="feature_authentication_invalid_email_and_or_password">Invalid email and/or password</string>
     <string name="feature_authentication_sign_up">Sign up</string>
-    <string name="feature_authentication_back">Back</string>
+    <string name="feature_authentication_content_description_back">Back</string>
     <string name="feature_authentication_content_description_name">Name</string>
     <string name="feature_authentication_content_description_surname">Surname</string>
 </resources>

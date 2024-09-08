@@ -15,6 +15,7 @@ import com.landmuc.authentication.sign_up.SignUpScreen
 import com.landmuc.event_admin.EventAdminScreen
 import com.landmuc.event_list.EventListScreen
 import com.landmuc.event_user.EventUserScreen
+import com.landmuc.search.SearchScreen
 
 @Composable
 fun RootNavigation() {
@@ -51,7 +52,8 @@ fun RootNavigation() {
                                 eventId = event.eventId.toString()
                             )
                         )
-                    }
+                    },
+                    navigateToSearchScreen = { navController.navigate(Route.SearchScreen) }
                 )
             }
 
@@ -69,6 +71,14 @@ fun RootNavigation() {
             }
 
             composable<Route.EventStepUserScreen> {  }
+
+            composable<Route.SearchScreen> {
+                SearchScreen(
+                    onBackClick = {
+                        navController.navigateUp()
+                    }
+                )
+            }
         }
     }
 }

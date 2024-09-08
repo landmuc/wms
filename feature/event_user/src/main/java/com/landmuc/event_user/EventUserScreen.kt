@@ -32,8 +32,6 @@ fun EventUserScreen(
     eventIdAsString: String,
     viewModel: EventUserViewModel = koinViewModel()
 ) {
-    val snackbarHostState = remember { SnackbarHostState() }
-
     val stepList by viewModel.stepList.collectAsState()
     val eventIdAsUUID = UUID.fromString(eventIdAsString)
 

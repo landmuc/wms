@@ -4,7 +4,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -16,14 +21,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.landmuc.domain.model.Event
 import com.landmuc.event_list.component.EventListLazyColumn
+import com.landmuc.event_list.di.eventListViewModelModule
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.KoinApplication
+import org.koin.core.KoinApplication
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EventListScreen(
     onEventClick: (Event) -> Unit,
+    navigateToSearchScreen: () -> Unit,
     viewModel: EventListViewModel = koinViewModel()
 ) {
     val eventList by viewModel.eventList.collectAsState()
@@ -31,7 +42,7 @@ fun EventListScreen(
     //TODO: Try viewmodel init block?
     LaunchedEffect(Unit) {
         viewModel.getFollowedEvents()
-//        viewModel.getEventList()
+//        viewModel.getAllEvents()
     }
 
     Scaffold(
@@ -44,7 +55,19 @@ fun EventListScreen(
                         color = Color.Black
                     ) }
                 )
-        }
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { navigateToSearchScreen() }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = stringResource(id = R.string.feature_event_list_description_search),
+                )
+            }
+        },
+        floatingActionButtonPosition = FabPosition.End
+
     ) { innerPadding ->
         Column(
             verticalArrangement = Arrangement.Center,
@@ -62,4 +85,19 @@ fun EventListScreen(
     }
 
 
+}
+
+
+
+@Preview
+@Composable
+fun PreviewEventListScreen() {
+    KoinApplication(
+        application = { modules(eventListViewModelModule) }
+    ) {
+        EventListScreen(
+            onEventClick = { },
+            navigateToSearchScreen = { }
+        )
+    }
 }

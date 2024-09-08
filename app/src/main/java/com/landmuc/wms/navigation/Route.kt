@@ -26,5 +26,8 @@ sealed class Route() {
 
     @Serializable
     object EventStepUserScreen
+
+    @Serializable
+    object SearchScreen
 }
 

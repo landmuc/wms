@@ -69,6 +69,7 @@ dependencies {
     implementation(project(":feature:event_list"))
     implementation(project(":feature:event_admin"))
     implementation(project(":feature:event_user"))
+    implementation(project(":feature:search"))
 
     implementation(libs.androidx.core.ktx)
 

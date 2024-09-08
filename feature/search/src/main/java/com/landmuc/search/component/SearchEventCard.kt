@@ -1,4 +1,4 @@
-package com.landmuc.event_list.component
+package com.landmuc.search.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -33,7 +35,7 @@ import kotlinx.datetime.LocalTime
 import java.util.UUID
 
 @Composable
-fun EventCard(
+fun SearchEventCard(
     event: Event,
     onEventClick: (Event) -> Unit,
     modifier: Modifier = Modifier
@@ -54,11 +56,25 @@ fun EventCard(
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
-            Text(
-                text = event.title,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = event.title,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Icon(
+                    imageVector = if (true) Icons.Default.Check else Icons.Default.AddCircle,
+                    contentDescription = "Followed icon",
+                    tint = if (true) Color(0xFF2B722D) else Color.Black,
+                    modifier = Modifier.size(30.dp)
+                )
+
+            }
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = "Organizer: Lars U.", // TODO: Change to actual name of creator
@@ -107,7 +123,7 @@ fun EventCard(
 @Preview
 @Composable
 fun PreviewEventListCard() {
-    EventCard(
+    SearchEventCard(
         onEventClick = {},
         event = Event(
             eventId = UUID.randomUUID(),

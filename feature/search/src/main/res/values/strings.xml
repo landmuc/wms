@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_search_screen_title">Search</string>
+    <string name="feature_search_screen_label_search_events">Search Events</string>
+    <string name="feature_search_content_description_back">Back</string>
+    <string name="feature_search_content_description_search">Search</string>
+</resources>
