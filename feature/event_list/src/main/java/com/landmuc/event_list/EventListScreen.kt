@@ -42,7 +42,6 @@ fun EventListScreen(
     //TODO: Try viewmodel init block?
     LaunchedEffect(Unit) {
         viewModel.getFollowedEvents()
-//        viewModel.getAllEvents()
     }
 
     Scaffold(
@@ -70,7 +69,7 @@ fun EventListScreen(
 
     ) { innerPadding ->
         Column(
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()

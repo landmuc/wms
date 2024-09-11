@@ -33,7 +33,8 @@ class SearchViewModel(
 
     fun getSearchFilteredEvents(searchQuery: String) {
         viewModelScope.launch {
-            eventDataRep.getSearchFilteredEvents(searchQuery)
+            val list = eventDataRep.getSearchFilteredEvents(searchQuery).map { eventDto ->  eventDto.toEvent() }
+            _searchFilteredEventList.update { list }
         }
     }
 }

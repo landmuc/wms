@@ -12,24 +12,23 @@ import java.util.UUID
 
 class EventDataRepositoryImpl(
     private val client: SupabaseClient
-): EventDataRepository {
+) : EventDataRepository {
     // regarding events
     override suspend fun getAllEvents(): List<EventDto> {
         return client.supabaseClient.postgrest.from("wms_events").select().decodeList<EventDto>()
     }
 
     override suspend fun getSearchFilteredEvents(searchQuery: String): List<EventDto> {
-       return client.supabaseClient.postgrest.from("wms_events").select() {
-           filter {
-               or {
-                   like("name", searchQuery)
-               }
-               // use or {
-           //   like(...)
-           //   like(...)
-           // }  for multiple filters
-           }
-       }.decodeList<EventDto>()
+        return client.supabaseClient.postgrest.from("wms_events").select() {
+            filter {
+                ilike("title", "%$searchQuery%")
+
+                // use or {
+                //   like(...)
+                //   like(...)
+                // }  for multiple filters
+            }
+        }.decodeList<EventDto>()
     }
 
     override suspend fun getFollowedEvents(): List<EventDto> {
@@ -45,7 +44,7 @@ class EventDataRepositoryImpl(
 
         val followedEvents = currentUserData.joinedEvents
 
-        return  client.supabaseClient.postgrest.from("wms_events").select() {
+        return client.supabaseClient.postgrest.from("wms_events").select() {
             filter {
                 isIn("event_id", followedEvents)
             }
