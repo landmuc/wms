@@ -21,9 +21,13 @@ data class EventDto (
     @SerialName("time_created")
     val timeCreated: LocalTime,
     @SerialName("event_date")
-    val eventDate: LocalDate? = null,
+    val eventDate: LocalDate,
     @SerialName("event_time")
-    val eventTime: LocalTime? = null,
+    val eventTime: LocalTime,
+    @SerialName("event_end_date")
+    val eventEndDate: LocalDate,
+    @SerialName("event_end_time")
+    val eventEndTime: LocalTime,
 //    val stepList: List<StepDto>? = null,
 //    val adminList: List<UserDto>? = null,
 //    val userList: List<UserDto>? = null

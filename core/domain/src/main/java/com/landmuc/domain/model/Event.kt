@@ -1,5 +1,6 @@
 package com.landmuc.domain.model
 
+import com.landmuc.domain.event.EventStatus
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import java.util.UUID
@@ -13,7 +14,9 @@ data class Event (
     val timeCreated: LocalTime,
     val eventDate: LocalDate,
     val eventTime: LocalTime,
-    val isOngoing: Boolean,
+    val eventEndDate: LocalDate,
+    val eventEndTime: LocalTime,
+    val eventStatus: EventStatus,
 //    val stepList: List<Step>,
 //    val adminList: List<User>,
 //    val userList: List<User>

@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.landmuc.domain.event.EventStatus
 import com.landmuc.domain.model.Event
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
@@ -48,7 +49,11 @@ fun SearchEventCard(
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         colors = CardDefaults.cardColors(
-            containerColor = if (event.isOngoing) Color(0xFFFFF9C4) else Color(0xFFE3F2FD)
+            containerColor = when(event.eventStatus) {
+                is EventStatus.Upcoming -> Color(0xFFFFF9C4)
+                is EventStatus.Ongoing -> Color(0xFFE3F2FD)
+                is EventStatus.Over -> Color(0xFFF0766D)
+            },
         )
     ) {
         Column(
@@ -105,13 +110,21 @@ fun SearchEventCard(
                     onClick = { }, // required to define an onClick()
                     label = {
                         Text(
-                            text = if (event.isOngoing) "Ongoing" else "Upcoming",
+                            text = when(event.eventStatus) {
+                                is EventStatus.Upcoming -> "Upcoming"
+                                is EventStatus.Ongoing -> "Ongoing"
+                                is EventStatus.Over -> "Over"
+                            },
                             style = MaterialTheme.typography.labelSmall,
                             color = Color.White
                         )
                     },
                     colors = SuggestionChipDefaults.suggestionChipColors(
-                        containerColor = if (event.isOngoing) Color(0xFFFFD54F) else Color(0xFF64B5F6)
+                        containerColor = when(event.eventStatus) {
+                            is EventStatus.Upcoming -> Color(0xFFFFD54F)
+                            is EventStatus.Ongoing -> Color(0xFF64B5F6)
+                            is EventStatus.Over -> Color(0xFFF44336)
+                        },
                     ),
                     border = SuggestionChipDefaults.suggestionChipBorder(enabled = false)
                 )
@@ -133,7 +146,9 @@ fun PreviewEventListCard() {
             timeCreated = LocalTime(23, 12, 32),
             eventDate = LocalDate(2024,11,11),
             eventTime = LocalTime(7, 14, 21),
-            isOngoing = false
+            eventEndDate = LocalDate(2024,11,11),
+            eventEndTime = LocalTime(7, 14, 21),
+            eventStatus = EventStatus.Over
         )
     )
 }
