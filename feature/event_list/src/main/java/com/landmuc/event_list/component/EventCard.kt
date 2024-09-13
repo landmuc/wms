@@ -68,7 +68,7 @@ fun EventCard(
             Text(
                 text = "Organizer: Lars U.", // TODO: Change to actual name of creator
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color.Gray
+                color = Color.Black
             )
             Spacer(modifier = Modifier.height(8.dp))
             Row(
@@ -80,14 +80,14 @@ fun EventCard(
                     Icon(
                         imageVector = Icons.Default.DateRange,
                         contentDescription = "Date",
-                        tint = Color.Gray,
+                        tint = Color.Black,
                         modifier = Modifier.size(16.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = event.eventDate.toString(),
                         style = MaterialTheme.typography.bodySmall,
-                        color = Color.Gray
+                        color = Color.Black
                     )
                 }
                 SuggestionChip(
@@ -95,9 +95,9 @@ fun EventCard(
                     label = {
                         Text(
                             text = when(event.eventStatus) {
-                                is EventStatus.Upcoming -> "Upcoming"
-                                is EventStatus.Ongoing -> "Ongoing"
-                                is EventStatus.Over -> "Over"
+                                is EventStatus.Upcoming -> EventStatus.Upcoming.text
+                                is EventStatus.Ongoing -> EventStatus.Ongoing.text
+                                is EventStatus.Over -> EventStatus.Over.text
                             },
                             style = MaterialTheme.typography.labelSmall,
                             color = Color.White
@@ -132,7 +132,7 @@ fun PreviewEventListCard() {
             eventTime = LocalTime(7, 14, 21),
             eventEndDate = LocalDate(2024,11,11),
             eventEndTime = LocalTime(7, 14, 21),
-            eventStatus = EventStatus.Over
+            eventStatus = EventStatus.Ongoing
         )
     )
 }

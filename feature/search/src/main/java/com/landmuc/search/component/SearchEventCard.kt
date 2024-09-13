@@ -84,7 +84,7 @@ fun SearchEventCard(
             Text(
                 text = "Organizer: Lars U.", // TODO: Change to actual name of creator
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color.Gray
+                color = Color.Black
             )
             Spacer(modifier = Modifier.height(8.dp))
             Row(
@@ -96,14 +96,14 @@ fun SearchEventCard(
                     Icon(
                         imageVector = Icons.Default.DateRange,
                         contentDescription = "Date",
-                        tint = Color.Gray,
+                        tint = Color.Black,
                         modifier = Modifier.size(16.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = event.eventDate.toString(),
                         style = MaterialTheme.typography.bodySmall,
-                        color = Color.Gray
+                        color = Color.Black
                     )
                 }
                 SuggestionChip(
@@ -111,9 +111,9 @@ fun SearchEventCard(
                     label = {
                         Text(
                             text = when(event.eventStatus) {
-                                is EventStatus.Upcoming -> "Upcoming"
-                                is EventStatus.Ongoing -> "Ongoing"
-                                is EventStatus.Over -> "Over"
+                                is EventStatus.Upcoming -> EventStatus.Upcoming.text
+                                is EventStatus.Ongoing -> EventStatus.Ongoing.text
+                                is EventStatus.Over -> EventStatus.Over.text
                             },
                             style = MaterialTheme.typography.labelSmall,
                             color = Color.White
