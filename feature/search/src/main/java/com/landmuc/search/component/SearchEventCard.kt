@@ -73,9 +73,8 @@ fun SearchEventCard(
                 )
 
                 Icon(
-                    imageVector = if (true) Icons.Default.Check else Icons.Default.AddCircle,
+                    imageVector = if (event.isFollowed) Icons.Default.Check else Icons.Default.AddCircle,
                     contentDescription = "Followed icon",
-                    tint = if (true) Color(0xFF2B722D) else Color.Black,
                     modifier = Modifier.size(30.dp)
                 )
 
@@ -139,7 +138,7 @@ fun PreviewEventListCard() {
     SearchEventCard(
         onEventClick = {},
         event = Event(
-            eventId = UUID.randomUUID(),
+            id = UUID.randomUUID(),
             title = "Preview Event",
             description = "Description of Preview Event",
             dateCreated = LocalDate(2024,7,11),
@@ -148,7 +147,8 @@ fun PreviewEventListCard() {
             eventTime = LocalTime(7, 14, 21),
             eventEndDate = LocalDate(2024,11,11),
             eventEndTime = LocalTime(7, 14, 21),
-            eventStatus = EventStatus.Over
+            eventStatus = EventStatus.Over,
+            isFollowed = true
         )
     )
 }

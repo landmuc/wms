@@ -123,7 +123,7 @@ fun PreviewEventListCard() {
     EventCard(
         onEventClick = {},
         event =Event(
-            eventId = UUID.randomUUID(),
+            id = UUID.randomUUID(),
             title = "Preview Event",
             description = "Description of Preview Event",
             dateCreated = LocalDate(2024,7,11),
@@ -132,7 +132,8 @@ fun PreviewEventListCard() {
             eventTime = LocalTime(7, 14, 21),
             eventEndDate = LocalDate(2024,11,11),
             eventEndTime = LocalTime(7, 14, 21),
-            eventStatus = EventStatus.Ongoing
+            eventStatus = EventStatus.Ongoing,
+            isFollowed = false
         )
     )
 }

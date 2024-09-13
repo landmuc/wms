@@ -6,7 +6,7 @@ import kotlinx.datetime.LocalTime
 import java.util.UUID
 
 data class Event (
-    val eventId: UUID,
+    val id: UUID,
     val title: String,
     val description: String,
 //    val createdBy: User,
@@ -17,6 +17,7 @@ data class Event (
     val eventEndDate: LocalDate,
     val eventEndTime: LocalTime,
     val eventStatus: EventStatus,
+    val isFollowed: Boolean
 //    val stepList: List<Step>,
 //    val adminList: List<User>,
 //    val userList: List<User>

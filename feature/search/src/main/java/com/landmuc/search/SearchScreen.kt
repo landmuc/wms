@@ -23,9 +23,9 @@ fun SearchScreen(
     val searchQuery by viewModel.searchQuery.collectAsState()
     val searchFilteredEventList by viewModel.searchFilteredEventList.collectAsState()
 
-    LaunchedEffect(Unit) {
-        viewModel.getAllEvents()
-    }
+//    LaunchedEffect(Unit) {
+//        viewModel.getAllEvents()
+//    }
 
     Scaffold(
         topBar = {

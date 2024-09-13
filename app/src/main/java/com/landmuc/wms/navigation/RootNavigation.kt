@@ -49,7 +49,7 @@ fun RootNavigation() {
                         navController.navigate(
                             Route.EventUserScreen(
                                 eventTitle = event.title,
-                                eventId = event.eventId.toString()
+                                eventId = event.id.toString()
                             )
                         )
                     },

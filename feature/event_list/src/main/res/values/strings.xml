@@ -2,4 +2,5 @@
 <resources>
     <string name="feature_event_list_description_creator">Creator</string>
     <string name="feature_event_list_description_search">Search</string>
+    <string name="feature_event_list_description_create_event">Create new event</string>
 </resources>

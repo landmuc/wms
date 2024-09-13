@@ -56,9 +56,6 @@ class EventDataRepositoryImpl(
         TODO("Not yet implemented")
     }
 
-    override suspend fun searchEvent() {
-        TODO("Not yet implemented")
-    }
 
     // regarding steps
     override suspend fun getStepList(eventId: UUID): List<StepDto> {
