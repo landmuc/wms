@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 class SearchViewModel(
     private val updateFollowedEventsInEventList: UpdateFollowedEventsInEventList,
@@ -71,23 +72,28 @@ class SearchViewModel(
             val followedEventList = eventDataRep.getFollowedEvents().map { eventDto -> eventDto.toEvent() }
 
             _followedEventList.update { followedEventList }
+            val ids = _followedEventList.value.map { it.id }
+            Log.d("TESTDEBUG", "FollowedEventList from Server: $ids")
         }
     }
 
-    private fun updateFollowedEventList(eventList: List<Event>) {
+    private fun updateFollowedEventList(eventListIds: List<UUID>) {
         viewModelScope.launch {
-            val updatedList = eventList.map { it.id }
-            eventDataRep.updateFollowedEventList(updatedList)
+            //val updatedList = eventList.map { it.id }
+            eventDataRep.updateFollowedEventList(eventListIds)
         }
     }
 
     fun followEvent(event: Event) {
         // create a new updated local list of followed events to send to the server
-        val updatedList = _followedEventList.value + event
+        val followedEventListIds = _followedEventList.value.map { it.id }
+        Log.d("TESTDEBUG", "FollowedEventList: $followedEventListIds")
+        val updatedListIds = followedEventListIds + event.id
+        Log.d("TESTDEBUG", "ADD LIST: $updatedListIds")
 
         // update the cell of column "followed_events" of the table "wms_users"
         // of the currently logged in user
-        updateFollowedEventList(updatedList)
+        updateFollowedEventList(updatedListIds)
 
         // get the new event list from the server
         // this prevents having and using a local version of a followedEventList while simultaneously having a list on the server
@@ -101,11 +107,14 @@ class SearchViewModel(
 
     fun unfollowEvent(event: Event) {
         // create a new updated local list of followed events to send to the server
-        val updatedList = _followedEventList.value - event
+        val followedEventListIds = _followedEventList.value.map { it.id }
+        Log.d("TESTDEBUG", "FollowedEventList: $followedEventListIds")
+        val updatedListIds = followedEventListIds - event.id
+        Log.d("TESTDEBUG", "DELETE LIST: $updatedListIds")
 
         // update the cell of column "followed_events" of the table "wms_users"
         // of the currently logged in user
-        updateFollowedEventList(updatedList)
+        updateFollowedEventList(updatedListIds)
 
         // get the new event list from the server
         // this prevents having and using a local version of a followedEventList while simultaneously having a list on the server
