@@ -2,11 +2,13 @@ package com.landmuc.network.repository
 
 import com.landmuc.domain.dto.EventDto
 import com.landmuc.domain.dto.StepDto
+import com.landmuc.domain.dto.UUIDListDto
 import com.landmuc.domain.dto.UserDto
 import com.landmuc.domain.model.Step
 import com.landmuc.domain.repository.EventDataRepository
 import com.landmuc.network.SupabaseClient
 import io.github.jan.supabase.gotrue.auth
+import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
 import java.util.UUID
 
@@ -42,7 +44,7 @@ class EventDataRepositoryImpl(
             }
         }.decodeSingle<UserDto>()
 
-        val followedEvents = currentUserData.joinedEvents
+        val followedEvents = currentUserData.followedEvents
 
         return client.supabaseClient.postgrest.from("wms_events").select() {
             filter {
@@ -54,6 +56,26 @@ class EventDataRepositoryImpl(
 
     override suspend fun createEvent() {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun updateFollowedEventList(updatedList: List<UUID>) {
+        val user = client.supabaseClient.auth.currentUserOrNull()
+        val userIdAsString = user?.id
+        val userIdAsUUID = UUID.fromString(userIdAsString)
+
+        val serializableList = updatedList.map { it.toString() }
+//        val serializableClass = UUIDListDto( uuidList = updatedList)
+//        val serializableList = serializableClass.uuidList
+
+        client.supabaseClient.from("wms_users").update(
+            {
+                set("followed_events", serializableList )
+            }
+        ) {
+            filter {
+                eq("id", userIdAsUUID)
+            }
+        }
     }
 
 

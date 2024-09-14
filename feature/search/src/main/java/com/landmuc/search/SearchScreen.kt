@@ -48,7 +48,11 @@ fun SearchScreen(
         ) {
             SearchEventListLazyColumn(
                 eventList = searchFilteredEventList,
-                onEventClick = {})
+                onEventClick = {},
+                updateFollowedEventList = { event ->
+                    if (event.isFollowed) viewModel.unfollowEvent(event) else viewModel.followEvent(event)
+                }
+                )
 
         }
     }

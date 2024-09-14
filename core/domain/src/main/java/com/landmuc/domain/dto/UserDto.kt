@@ -14,8 +14,8 @@ data class UserDto (
     val name: String?,
     val surname: String?,
     val email: String,
-   @SerialName("joined_events")
+   @SerialName("followed_events")
    @Serializable(with = UUIDListSerializer::class)
-    val joinedEvents: List<@Contextual UUID>,
+    val followedEvents: List<@Contextual UUID>,
 //    val adminEventList: List<EventDto>
 )

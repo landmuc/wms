@@ -39,6 +39,7 @@ import java.util.UUID
 fun SearchEventCard(
     event: Event,
     onEventClick: (Event) -> Unit,
+    updateFollowedEventList: (Event) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -75,7 +76,11 @@ fun SearchEventCard(
                 Icon(
                     imageVector = if (event.isFollowed) Icons.Default.Check else Icons.Default.AddCircle,
                     contentDescription = "Followed icon",
-                    modifier = Modifier.size(30.dp)
+                    modifier = Modifier
+                        .size(30.dp)
+                        .clickable {
+                            updateFollowedEventList(event)
+                        }
                 )
 
             }
@@ -137,6 +142,7 @@ fun SearchEventCard(
 fun PreviewEventListCard() {
     SearchEventCard(
         onEventClick = {},
+        updateFollowedEventList = {},
         event = Event(
             id = UUID.randomUUID(),
             title = "Preview Event",

@@ -12,6 +12,7 @@ import com.landmuc.domain.model.Event
 fun SearchEventListLazyColumn(
     eventList: List<Event>,
     onEventClick: (Event) -> Unit,
+    updateFollowedEventList: (Event) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -20,7 +21,8 @@ fun SearchEventListLazyColumn(
         items(items = eventList) {event ->
             SearchEventCard(
                 event = event,
-                onEventClick = { onEventClick(event) }
+                onEventClick = { onEventClick(event) },
+                updateFollowedEventList = { updateFollowedEventList(event) }
             )
         }
     }
