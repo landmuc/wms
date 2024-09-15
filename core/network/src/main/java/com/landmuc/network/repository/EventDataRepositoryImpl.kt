@@ -2,7 +2,6 @@ package com.landmuc.network.repository
 
 import com.landmuc.domain.dto.EventDto
 import com.landmuc.domain.dto.StepDto
-import com.landmuc.domain.dto.UUIDListDto
 import com.landmuc.domain.dto.UserDto
 import com.landmuc.domain.model.Step
 import com.landmuc.domain.repository.EventDataRepository
@@ -64,8 +63,6 @@ class EventDataRepositoryImpl(
         val userIdAsUUID = UUID.fromString(userIdAsString)
 
         val serializableList = updatedList.map { it.toString() }
-//        val serializableClass = UUIDListDto( uuidList = updatedList)
-//        val serializableList = serializableClass.uuidList
 
         client.supabaseClient.from("wms_users").update(
             {
