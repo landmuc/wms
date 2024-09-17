@@ -20,5 +20,4 @@ data class Event (
     val isFollowed: Boolean
 //    val stepList: List<Step>,
 //    val adminList: List<User>,
-//    val userList: List<User>
 )

@@ -9,7 +9,7 @@ interface EventDataRepository {
     suspend fun getAllEvents(): List<EventDto>
     suspend fun getSearchFilteredEvents(searchQuery: String): List<EventDto>
     suspend fun getFollowedEvents(): List<EventDto>
-    suspend fun createEvent()
+    suspend fun createEvent(event: EventDto)
     suspend fun updateFollowedEventList(updatedList: List<UUID>)
     // regarding steps
     suspend fun getStepList(eventId: UUID): List<StepDto>

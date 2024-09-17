@@ -53,8 +53,8 @@ class EventDataRepositoryImpl(
     }
 
 
-    override suspend fun createEvent() {
-        TODO("Not yet implemented")
+    override suspend fun createEvent(event: EventDto) {
+        client.supabaseClient.postgrest.from("wms_events").insert(event)
     }
 
     override suspend fun updateFollowedEventList(updatedList: List<UUID>) {

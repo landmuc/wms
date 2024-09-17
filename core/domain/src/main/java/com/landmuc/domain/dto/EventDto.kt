@@ -30,5 +30,4 @@ data class EventDto (
     val eventEndTime: LocalTime,
 //    val stepList: List<StepDto>? = null,
 //    val adminList: List<UserDto>? = null,
-//    val userList: List<UserDto>? = null
 )

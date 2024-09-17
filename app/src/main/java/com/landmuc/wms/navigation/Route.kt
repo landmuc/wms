@@ -13,13 +13,7 @@ sealed class Route() {
     object EventListScreen
 
     @Serializable
-    object EventAdminScreen
-
-    @Serializable
-    object EventStepAdminScreen
-
-    @Serializable
-    data class EventUserScreen(
+    data class EventDetailsScreen(
         val eventTitle: String,
         val eventId: String
     )

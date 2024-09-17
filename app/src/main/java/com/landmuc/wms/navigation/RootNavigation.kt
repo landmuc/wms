@@ -12,9 +12,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.landmuc.authentication.sign_in.SignInScreen
 import com.landmuc.authentication.sign_up.SignUpScreen
-import com.landmuc.event_admin.EventAdminScreen
 import com.landmuc.event_list.EventListScreen
-import com.landmuc.event_user.EventUserScreen
+import com.landmuc.event_user.EventDetailsScreen
 import com.landmuc.search.SearchScreen
 
 @Composable
@@ -47,7 +46,7 @@ fun RootNavigation() {
                 EventListScreen(
                     onEventClick = { event ->
                         navController.navigate(
-                            Route.EventUserScreen(
+                            Route.EventDetailsScreen(
                                 eventTitle = event.title,
                                 eventId = event.id.toString()
                             )
@@ -57,13 +56,9 @@ fun RootNavigation() {
                 )
             }
 
-            composable<Route.EventAdminScreen> { EventAdminScreen() }
-
-            composable<Route.EventStepAdminScreen> {  }
-
-            composable<Route.EventUserScreen> {
-                val args = it.toRoute<Route.EventUserScreen>()
-                EventUserScreen(
+            composable<Route.EventDetailsScreen> {
+                val args = it.toRoute<Route.EventDetailsScreen>()
+                EventDetailsScreen(
                     onBackClick = {navController.navigateUp()},
                     eventTitle = args.eventTitle,
                     eventIdAsString = args.eventId
