@@ -47,6 +47,7 @@ fun CreateEventScreen(
     val eventEndTime by viewModel.eventEndTime.collectAsState()
     val showDateRangePicker by viewModel.showDateRangePicker.collectAsState()
     val showTimePicker by viewModel.showTimePicker.collectAsState()
+    val showEndTimePicker by viewModel.showEndTimePicker.collectAsState()
 
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
@@ -113,9 +114,23 @@ fun CreateEventScreen(
                 onDismiss = viewModel::onShowTimePickerChanged
             )
 
-
+            Button(onClick = viewModel::onShowEndTimePickerChanged) {
+                Text(text = "Select Time")
+            }
+            if (showEndTimePicker) DialTimerPicker(
+                onConfirm = { timePickerState ->
+                    viewModel.onEventEndTimeChanged(timePickerState)
+                },
+                onDismiss = viewModel::onShowEndTimePickerChanged
+            )
 
             Text(text = "Event Time: $eventTime")
+            Text(text = "Event End Time: $eventEndTime")
+            
+            Button(onClick = { viewModel.sendCreatedEventToServer() }) {
+                Text(text = "Create Event")
+            }
+
         }
     }
 }

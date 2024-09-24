@@ -49,6 +49,9 @@ class CreateEventViewModel(
     private val _showTimePicker = MutableStateFlow(false)
     val showTimePicker = _showTimePicker.asStateFlow()
 
+    private val _showEndTimePicker = MutableStateFlow(false)
+    val showEndTimePicker = _showEndTimePicker.asStateFlow()
+
     fun onEventTitleChanged(title: String) {
         _eventTitle.update { title }
     }
@@ -76,8 +79,13 @@ class CreateEventViewModel(
         _eventEndDate.update { newDate }
     }
 
-    fun onEventEndTimeChanged(time: LocalTime) {
-        _eventEndTime.update { time }
+    @OptIn(ExperimentalMaterial3Api::class)
+    fun onEventEndTimeChanged(time: TimePickerState) {
+        val newTime = LocalTime(
+            hour = time.hour,
+            minute = time.minute,
+        )
+        _eventEndTime.update { newTime }
     }
 
     fun onShowDateRangePickerChanged() {
@@ -86,6 +94,10 @@ class CreateEventViewModel(
 
     fun onShowTimePickerChanged() {
         _showTimePicker.update { !_showTimePicker.value }
+    }
+
+    fun onShowEndTimePickerChanged() {
+        _showEndTimePicker.update { !_showEndTimePicker.value }
     }
 
     fun sendCreatedEventToServer() {
