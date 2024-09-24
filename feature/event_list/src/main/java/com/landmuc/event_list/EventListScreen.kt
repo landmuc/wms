@@ -38,6 +38,7 @@ import org.koin.compose.KoinApplication
 fun EventListScreen(
     onEventClick: (Event) -> Unit,
     navigateToSearchScreen: () -> Unit,
+    navigateToCreateEventScreen: () -> Unit,
     viewModel: EventListViewModel = koinViewModel()
 ) {
     val eventList by viewModel.eventList.collectAsState()
@@ -63,6 +64,7 @@ fun EventListScreen(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.Bottom
             ){
+                // search button
                 ExtendedFloatingActionButton(
                     onClick = { navigateToSearchScreen() }
                 ) {
@@ -71,8 +73,9 @@ fun EventListScreen(
                         contentDescription = stringResource(id = R.string.feature_event_list_description_search)
                     )
                 }
+                // Create new event button
                 FloatingActionButton(
-                    onClick = {  }
+                    onClick = {  navigateToCreateEventScreen() }
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
@@ -112,7 +115,8 @@ fun PreviewEventListScreen() {
     ) {
         EventListScreen(
             onEventClick = { },
-            navigateToSearchScreen = { }
+            navigateToSearchScreen = { },
+            navigateToCreateEventScreen = { }
         )
     }
 }

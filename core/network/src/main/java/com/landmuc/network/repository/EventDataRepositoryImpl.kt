@@ -1,6 +1,7 @@
 package com.landmuc.network.repository
 
 import com.landmuc.domain.dto.EventDto
+import com.landmuc.domain.dto.NewEventDto
 import com.landmuc.domain.dto.StepDto
 import com.landmuc.domain.dto.UserDto
 import com.landmuc.domain.model.Step
@@ -53,7 +54,7 @@ class EventDataRepositoryImpl(
     }
 
 
-    override suspend fun createEvent(event: EventDto) {
+    override suspend fun createEvent(event: NewEventDto) {
         client.supabaseClient.postgrest.from("wms_events").insert(event)
     }
 

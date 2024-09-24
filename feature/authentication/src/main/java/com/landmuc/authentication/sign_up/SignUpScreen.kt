@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import com.landmuc.authentication.R
 import com.landmuc.authentication.di.signUpViewModelModule
 import com.landmuc.domain.event.SignUpResult
+import com.landmuc.network.di.networkModule
 import io.github.jan.supabase.annotations.SupabaseExperimental
 import io.github.jan.supabase.compose.auth.ui.email.OutlinedEmailField
 import io.github.jan.supabase.compose.auth.ui.password.OutlinedPasswordField
@@ -267,7 +268,7 @@ fun SignUpScreen(
 @Composable
 fun SignUpScreenPreview() {
     KoinApplication(
-        application = { modules(signUpViewModelModule)}
+        application = { modules(networkModule, signUpViewModelModule)}
     ) {
         SignUpScreen(onBackClick = { })
     }
