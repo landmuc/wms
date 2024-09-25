@@ -1,14 +1,22 @@
 package com.landmuc.create_event
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -18,7 +26,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TimePicker
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -26,6 +33,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.landmuc.create_event.component.DateRangePickerModal
 import com.landmuc.create_event.component.DialTimerPicker
@@ -74,24 +82,38 @@ fun CreateEventScreen(
                 .padding(innerPadding)
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.Start
         ) {
+            Text(
+                text = "Event Title",
+                fontWeight = FontWeight.Bold
+            )
             OutlinedTextField(
                 value = eventTitle,
                 onValueChange = viewModel::onEventTitleChanged,
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(text = "Event title") }
+                label = { Text(text = "Event title") },
+                modifier = Modifier.fillMaxWidth()
             )
-
-            OutlinedTextField(
-                value = eventDescription,
-                onValueChange = viewModel::onEventDescriptionChanged,
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(text = "Event Description") }
+            Text(
+                text = "Date",
+                fontWeight = FontWeight.Bold
             )
-
-            Button(onClick = viewModel::onShowDateRangePickerChanged) {
-                Text(text = "Pick Date Range")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Start
+            ) {
+                OutlinedTextField(
+                    value = "$eventDate - $eventEndDate",
+                    onValueChange = {},
+                    readOnly = true,
+                    modifier = Modifier.weight(0.75f)
+                )
+                IconButton(
+                    onClick = { viewModel.onShowDateRangePickerChanged() },
+                    modifier = Modifier.weight(0.25f)
+                ) {
+                    Icon(imageVector = Icons.Default.DateRange, contentDescription = "Date Range")
+                }
                 if (showDateRangePicker) DateRangePickerModal(
                     onDateRangeSelected = { pair ->
                         viewModel.onEventDateChanged(pair.first)
@@ -101,22 +123,40 @@ fun CreateEventScreen(
                 )
             }
 
-            Text(text = "Event Date: $eventDate")
-            Text(text = "Event End Date: $eventEndDate")
-
-            Button(onClick = viewModel::onShowTimePickerChanged) {
-                Text(text = "Select Time")
+            Text(
+                text = "Time",
+                fontWeight = FontWeight.Bold
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                OutlinedTextField(
+                    value = "${eventTime.hour}:${eventTime.minute}",
+                    onValueChange = {},
+                    readOnly = true,
+                    trailingIcon = { Icons.Default.Info},
+                    modifier = Modifier.width(150.dp)
+                )
+                Text(
+                    text = "to",
+//                    modifier = Modifier.weight(0.25f)
+                )
+                OutlinedTextField(
+                    value = "${eventEndTime.hour}:${eventEndTime.minute}",
+                    onValueChange = {},
+                    readOnly = true,
+                    trailingIcon = { Icons.Default.Info},
+                    modifier = Modifier.width(0.dp)
+                )
             }
+
             if (showTimePicker) DialTimerPicker(
                 onConfirm = { timePickerState ->
                     viewModel.onEventTimeChanged(timePickerState)
                 },
                 onDismiss = viewModel::onShowTimePickerChanged
             )
-
-            Button(onClick = viewModel::onShowEndTimePickerChanged) {
-                Text(text = "Select Time")
-            }
             if (showEndTimePicker) DialTimerPicker(
                 onConfirm = { timePickerState ->
                     viewModel.onEventEndTimeChanged(timePickerState)
@@ -124,13 +164,59 @@ fun CreateEventScreen(
                 onDismiss = viewModel::onShowEndTimePickerChanged
             )
 
-            Text(text = "Event Time: $eventTime")
-            Text(text = "Event End Time: $eventEndTime")
-            
+//            Button(onClick = viewModel::onShowDateRangePickerChanged) {
+//                Text(text = "Pick Date Range")
+//                if (showDateRangePicker) DateRangePickerModal(
+//                    onDateRangeSelected = { pair ->
+//                        viewModel.onEventDateChanged(pair.first)
+//                        viewModel.onEventEndDateChanged(pair.second)
+//                    },
+//                    onDismiss = viewModel::onShowDateRangePickerChanged
+//                )
+//            }
+
+//            Text(text = "Event Date: $eventDate")
+//            Text(text = "Event End Date: $eventEndDate")
+
+//            Button(onClick = viewModel::onShowTimePickerChanged) {
+//                Text(text = "Select Time")
+//            }
+//            if (showTimePicker) DialTimerPicker(
+//                onConfirm = { timePickerState ->
+//                    viewModel.onEventTimeChanged(timePickerState)
+//                },
+//                onDismiss = viewModel::onShowTimePickerChanged
+//            )
+//
+//            Button(onClick = viewModel::onShowEndTimePickerChanged) {
+//                Text(text = "Select Time")
+//            }
+//            if (showEndTimePicker) DialTimerPicker(
+//                onConfirm = { timePickerState ->
+//                    viewModel.onEventEndTimeChanged(timePickerState)
+//                },
+//                onDismiss = viewModel::onShowEndTimePickerChanged
+//            )
+//
+//            Text(text = "Event Time: $eventTime")
+//            Text(text = "Event End Time: $eventEndTime")
+
+            Text(
+                text = "Description",
+                fontWeight = FontWeight.Bold
+            )
+            OutlinedTextField(
+                value = eventDescription,
+                onValueChange = viewModel::onEventDescriptionChanged,
+                label = { Text(text = "Event Description") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(120.dp),
+            )
+
             Button(onClick = { viewModel.sendCreatedEventToServer() }) {
                 Text(text = "Create Event")
             }
-
         }
     }
 }
