@@ -92,12 +92,12 @@ class CreateEventViewModel(
         _showDateRangePicker.update { !_showDateRangePicker.value }
     }
 
-    fun onShowTimePickerChanged() {
-        _showTimePicker.update { !_showTimePicker.value }
+    fun onShowTimePickerChanged(show: Boolean = !_showTimePicker.value) {
+        _showTimePicker.update { show }
     }
 
-    fun onShowEndTimePickerChanged() {
-        _showEndTimePicker.update { !_showEndTimePicker.value }
+    fun onShowEndTimePickerChanged(show: Boolean = !_showEndTimePicker.value) {
+        _showEndTimePicker.update { show }
     }
 
     fun sendCreatedEventToServer() {

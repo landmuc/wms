@@ -9,9 +9,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TimeInput
-import androidx.compose.material3.TimePicker
-import androidx.compose.material3.TimePickerDefaults
-import androidx.compose.material3.TimePickerLayoutType
 import androidx.compose.material3.TimePickerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
@@ -27,7 +24,7 @@ import kotlinx.datetime.toLocalDateTime
 @Composable
 fun DialTimerPicker(
     onConfirm: (TimePickerState) -> Unit,
-    onDismiss: () -> Unit,
+//    onDismiss: () -> Unit,
 ) {
     val now = Clock.System.now()
 
@@ -47,11 +44,11 @@ fun DialTimerPicker(
             state = timePickerState,
         )
         Row(
-            horizontalArrangement = Arrangement.SpaceAround
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Button(onClick = onDismiss) {
-                Text(text = "Cancel")
-            }
+//            Button(onClick = onDismiss) {
+//                Text(text = "Cancel")
+//            }
             Button(onClick = { onConfirm(timePickerState) }) {
                 Text(text = "Confirm selection")
             }
@@ -65,6 +62,5 @@ fun DialTimerPicker(
 fun PreviewDialTimePicker() {
     DialTimerPicker(
         onConfirm = {},
-        onDismiss = {}
         )
 }
