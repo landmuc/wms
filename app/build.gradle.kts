@@ -70,6 +70,7 @@ dependencies {
     implementation(project(":feature:event_details"))
     implementation(project(":feature:search"))
     implementation(project(":feature:create_event"))
+    implementation(project(":feature:step_details"))
 
     implementation(libs.androidx.core.ktx)
 

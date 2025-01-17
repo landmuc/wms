@@ -16,6 +16,7 @@ import com.landmuc.create_event.CreateEventScreen
 import com.landmuc.event_list.EventListScreen
 import com.landmuc.event_user.EventDetailsScreen
 import com.landmuc.search.SearchScreen
+import com.landmuc.step_details.StepDetailsScreen
 
 @Composable
 fun RootNavigation() {
@@ -79,6 +80,10 @@ fun RootNavigation() {
 
             composable<Route.CreateEventScreen> {
                 CreateEventScreen( onBackClick = { navController.navigateUp() } )
+            }
+
+            composable<Route.StepDetailsScreen> {
+                StepDetailsScreen()
             }
         }
     }

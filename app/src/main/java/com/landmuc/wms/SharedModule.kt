@@ -6,6 +6,7 @@ import com.landmuc.event_list.di.eventListModule
 import com.landmuc.event_user.di.eventDetailsModule
 import com.landmuc.network.di.networkModule
 import com.landmuc.search.di.searchModule
+import com.landmuc.step_details.di.stepDetailsViewModelModule
 import org.koin.dsl.module
 
 val sharedModule = module {
@@ -15,6 +16,7 @@ val sharedModule = module {
         eventListModule,
         eventDetailsModule,
         searchModule,
-        createEventModule
+        createEventModule,
+        stepDetailsViewModelModule
     )
 }
