@@ -21,4 +21,4 @@ Keeping track of complex events with multiple steps can be challenging. It's dif
 - **Supabase**
 
 ## Screenshots
-<img alt="login_screen.png" height="400" src="screenshots/login_screen.png" width="180"/>  <img alt="followedEvents_screen.png" height="400" src="screenshots/followedEvents_screen.png" width="180"/>  <img alt="eventSearch_screen.png" height="400" src="screenshots/eventSearch_screen.png" width="180"/>
+<img alt="login_screen.png" height="400" src="screenshots/login_screen.png" width="180"/>  <img alt="followedEvents_screen.png" height="400" src="screenshots/followedEvents_screen.png" width="180"/>  <img alt="eventSearch_screen.png" height="400" src="screenshots/eventSearch_screen.png" width="180"/>   <img alt="stepList_screen.png" height="400" src="screenshots/stepList_screen.png" width="180"/>
