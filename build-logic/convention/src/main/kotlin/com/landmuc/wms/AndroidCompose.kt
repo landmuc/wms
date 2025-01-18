@@ -26,6 +26,7 @@ internal fun Project.configureAndroidCompose(
             add("implementation", libs.findLibrary("androidx-compose-runtime").get())
             add("implementation", libs.findLibrary("androidx-lifecycle-runtime-ktx").get())
             add("implementation", libs.findLibrary("androidx-activity-compose").get())
+            add("implementation", libs.findLibrary("material-extended").get())
         }
     }
 }
