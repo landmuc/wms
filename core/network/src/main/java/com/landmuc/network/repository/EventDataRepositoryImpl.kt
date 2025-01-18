@@ -16,6 +16,14 @@ class EventDataRepositoryImpl(
     private val client: SupabaseClient
 ) : EventDataRepository {
     // regarding events
+    override suspend fun getEvent(eventId: UUID): EventDto {
+        return client.supabaseClient.postgrest.from("wms_events").select() {
+            filter {
+                eq("event_id", eventId)
+            }
+        }.decodeSingle<EventDto>()
+    }
+
     override suspend fun getAllEvents(): List<EventDto> {
         return client.supabaseClient.postgrest.from("wms_events").select().decodeList<EventDto>()
     }

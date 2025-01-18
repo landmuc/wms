@@ -34,6 +34,7 @@
             <option value="$PROJECT_DIR$/feature/event_details" />
             <option value="$PROJECT_DIR$/feature/event_list" />
             <option value="$PROJECT_DIR$/feature/search" />
+            <option value="$PROJECT_DIR$/feature/step_details" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
